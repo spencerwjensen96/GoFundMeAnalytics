@@ -20,15 +20,15 @@ export default function Home(props) {
     return (
         <Formik
             initialValues={{
-                name: '', /*Thor*/
-                address1: '', /*Castle*/
-                address2: '', /*Watch out for my hammer ;)*/
-                city: '', /*Asgard*/
-                state: '', /*The Sky*/
+                name: '',
+                address1: '',
+                address2: '',
+                city: '',
+                state: '',
                 zipcode: '',
             }}
             validateOnChange={false}
-            validateOnBlur={true}
+            validateOnBlur={false}
             validate={values => {
                 const errors = {}
                 if(!values.name) {
@@ -70,7 +70,7 @@ export default function Home(props) {
                 }
                 return errors
             }}
-            onSubmit={async (values, actions) => {
+            onSubmit={async (values) => {
                 let PostURL = 'http://localhost:8000/api/predictfunding/'
                 let apiResponse = await axios.post(PostURL, {
                     //values go here
@@ -94,12 +94,23 @@ export default function Home(props) {
 }
 
 
+const options = [
+  {
+    "value": "WI", "label": "Wisconsin"
+  },
+  {
+    "value": "WY", "label": "Wyoming"
+  }
+]
+
 /**
  * The form layout/html.
  * This component needs finishing.
  */
+
+
 const PaymentForm = props => {
-    return(
+  return(
         <>
         {/*console.log("issubmitting 2", props.isSubmitting)*/}
     <bs.Container fluid className="p-0 flex-column">
@@ -111,7 +122,17 @@ const PaymentForm = props => {
                         <Input title="Address Line 1:" name="address1" type="text" />
                         <Input title="(Optional) Address Line 2:" name="address2" type="text" />
                         <Input title="City:" name="city" type="text" />
-                        <Input title="State:" name="state" type="text" />
+                        <bs.Form.Label>State</bs.Form.Label>
+                        <Field name="State" as="select" placeholder="Wyoming" className="form-control">
+                          {options.map((option) =>
+                            <option key={option.label} value={option.value}>
+                              {option.label}
+                            </option>
+                            )}
+                        </Field>
+                        <bs.Form.Label>Slider</bs.Form.Label>
+                        <Field name="slider" as="range" placeholder="100" value="100" min="99" max="100000">
+                        </Field>
                         <Input title="Zip Code:" name="zipcode" type="text" />
                 </bs.Col>
                 <bs.Col md={6} className="p-1">
@@ -139,7 +160,6 @@ const PaymentForm = props => {
     );
 }
 
-
 /**
  * A form input.
  *   props.title - the title that shows above the input box
@@ -165,3 +185,4 @@ const Input = (props) => (
         </bs.Form.Group>
     )}</Field>
 )
+
