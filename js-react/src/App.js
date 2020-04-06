@@ -18,12 +18,10 @@ function App() {
           </bs.Col>
         </bs.Row>
         <bs.Row noGutters className="flex-grow-1 shadow-sm">
-          <bs.Col md={2} className="px-3 py-4" style={{ backgroundColor: "gray"}}> 
+          <bs.Col md={3} style={{ backgroundColor: "gray"}} className="px-3 py-4" > 
             <LeftSide />
           </bs.Col>
-          <bs.Col md={8} className="px-3 py-4" style={{ position: "relative", backgroundColor: "white"}}>
-            {/* A <Switch> looks through its children <Route>s and
-              renders the first one that matches the current URL. */}
+          <bs.Col md={9} style={{ position: "relative", backgroundColor: "white"}} className="px-3 py-4" >
               <Switch>
                 <Route path="/home">
                   <Home />
