@@ -14,15 +14,24 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import include, path
+from django.conf.urls import url
+
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    path('api/', include('api.urls'))
+]
+
+# when we add the static react files then we can uncomment this section
+#
+# from django.urls import include, path
+# from django.conf.urls import url
+# from django.contrib import admin
+# from django.conf.urls.static import static
+# from django.conf import settings
 
 # urlpatterns = [
 #     path('admin/', admin.site.urls),
-# ]
-
-# Wire up our API using automatic URL routing.
-# Additionally, we include login URLs for the browsable API.
-urlpatterns = [
-    url(r'^', include(router.urls)),
-    url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework'))
-]
+#     path('api/', include('api.urls')),
+#     path('', include('client.urls')),
+# ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
