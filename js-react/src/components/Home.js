@@ -3,6 +3,7 @@ import * as bs from 'react-bootstrap'
 import { Formik, Form, Field} from 'formik'
 import axios from 'axios'
 import { useHistory } from 'react-router-dom';
+import Slider from 'calcite-react/Slider'
 
 
 export default function Home(props) {
@@ -131,8 +132,7 @@ const PaymentForm = props => {
                             )}
                         </Field>
                         <bs.Form.Label>Slider</bs.Form.Label>
-                        <Field name="slider" as="range" placeholder="100" value="100" min="99" max="100000">
-                        </Field>
+                        <Field component={Slider} name="volume" />
                         <Input title="Zip Code:" name="zipcode" type="text" />
                 </bs.Col>
                 <bs.Col md={6} className="p-1">
