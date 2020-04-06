@@ -26,7 +26,7 @@ SECRET_KEY = 'hrm8fo#nk-#mgr+-=gqm_9*bnwqzm6&(pc+ug#_gr4rzxm1(8l'
 DEBUG = True
 
 
-ALLOWED_HOSTS = ['http://localhost:8000', 'http://localhost:3000']
+ALLOWED_HOSTS = ['localhost']
 
 
 # Application definition
@@ -40,7 +40,9 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django_extensions',
     'rest_framework',
+    'corsheaders',
     'api',
+    # 'client',
 ]
 
 REST_FRAMEWORK = {
@@ -57,6 +59,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
 ]
 
 ROOT_URLCONF = 'gofundmeapi.urls'
@@ -122,6 +125,14 @@ USE_I18N = True
 USE_L10N = True
 
 USE_TZ = True
+
+# CORS STUFF
+CORS_ORIGIN_ALLOW_ALL = False
+
+CORS_ORIGIN_WHITELIST = [
+    "http://localhost:8000",
+    "http://localhost:3000"
+]
 
 
 # Static files (CSS, JavaScript, Images)
