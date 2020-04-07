@@ -82,7 +82,7 @@ const PaymentForm = props => {
     <bs.Container fluid className="p-0 flex-column">
         <Form>
         <bs.Row noGutters className="flex-grow-0 flex-shrink-0">
-                <bs.Col md={12} className="p-1">
+                <bs.Col md={12} className="p-1 m-">
                         <p>Go Fund Me Campaign Details</p>
                         <Input title="Title" name="title" type="text" />
                         <Input title="Description" name="description" type="text" />
@@ -100,7 +100,9 @@ const PaymentForm = props => {
 
                         {/*Slider*/}
                         <bs.Form.Label>Target Funding Goal</bs.Form.Label>
-                        <Field component={Slider} name="goal" min={100} max={100000} step={100} className="form-control" ></Field>
+                        <Field component={Slider} name="goal" min={100} max={100000} step={100} 
+                          className="form-control" 
+                          style={{ color: "green" }}/>
                         <FormHelperText>
                           ${props.form.values.goal}
                         </FormHelperText>
@@ -109,7 +111,7 @@ const PaymentForm = props => {
 
                         {/*submit button*/}
                         <bs.Button 
-                        variant='warning' 
+                        variant='outline-success' 
                         disabled={props.form.isSubmitting}
                         onClick={() => {
                             props.form.submitForm();
