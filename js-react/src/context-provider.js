@@ -28,6 +28,7 @@ export default class AppProvider extends React.Component {
     }
 
     async componentDidMount() {
+        // We need to load in all the campaigns here but not the analytics. That should be called during the button onClick().
         // this is where we make our axios API calls
         // const resp = await axios.get('http://localhost:8000/api/category/')
         // const resp2 = await axios.get('http://localhost:8000/api/product/')
