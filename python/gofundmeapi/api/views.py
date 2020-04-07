@@ -18,13 +18,13 @@ class LoanTest(APIView):
     def get(self, request, format=None):
         data =  {
         "Inputs": {
-                "input1":
-                {
-                    "ColumnNames": ["loan_status_numeric", "int_rate", "emp_length", "home_ownership", "annual_inc", "verification_status", "acc_now_delinq", "delinq_2yrs", "earliest_cr_line", "inq_last_6mths", "mths_since_last_delinq", "mths_since_last_record", "open_acc", "pub_rec", "revol_bal", "revol_util", "tot_coll_amt", "tot_cur_bal", "total_acc", "total_rev_hi_lim", "dti", "grade", "sub_grade"],
-                    "Values": [ [ "0", "0", "value", "value", "0", "value", "0", "0", "", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "value", "value" ], [ "0", "0", "value", "value", "0", "value", "0", "0", "", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "value", "value" ], ]
-                },        },
-            "GlobalParameters": {
-            }
+            "input1":
+            {
+                "ColumnNames": ["loan_status_numeric", "int_rate", "emp_length", "home_ownership", "annual_inc", "verification_status", "acc_now_delinq", "delinq_2yrs", "earliest_cr_line", "inq_last_6mths", "mths_since_last_delinq", "mths_since_last_record", "open_acc", "pub_rec", "revol_bal", "revol_util", "tot_coll_amt", "tot_cur_bal", "total_acc", "total_rev_hi_lim", "dti", "grade", "sub_grade"],
+                "Values": [ [ "0", "0", "value", "value", "0", "value", "0", "0", "", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "value", "value" ], [ "0", "0", "value", "value", "0", "value", "0", "0", "", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "value", "value" ], ]
+            },        },
+        "GlobalParameters": {
+        }
         }
         body = str.encode(json.dumps(data))
         url = 'https://ussouthcentral.services.azureml.net/workspaces/79b4b24bf3df4f82b129b81a8caceec6/services/6da19b3768e54c768d541a7186e06edd/execute?api-version=2.0&details=true'
