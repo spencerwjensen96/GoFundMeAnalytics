@@ -2,7 +2,16 @@ import React from 'react'
 // import axios from 'axios'
 import AppContext from './context'
 import App from './App'
+import CalciteThemeProvider, { CalciteTheme } from 'calcite-react/CalciteThemeProvider';
 // import { produce } from 'immer'
+
+const CustomTheme = {
+    ...CalciteTheme,
+    palette: {
+      ...CalciteTheme.palette,
+      blue: 'green'
+    }
+  };
 
 /** The context provider for our app */
 export default class AppProvider extends React.Component {
@@ -37,7 +46,9 @@ export default class AppProvider extends React.Component {
     render() {
         return (
             <AppContext.Provider value={{...this.state, ...this.actions}}>
-                <App />
+                <CalciteThemeProvider theme={CustomTheme} >
+                    <App />
+                </CalciteThemeProvider>
             </AppContext.Provider>
         )
     }
