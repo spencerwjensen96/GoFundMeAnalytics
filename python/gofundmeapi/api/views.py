@@ -45,3 +45,8 @@ class LoanTest(APIView):
             # Print the headers - they include the requert ID and the timestamp, which are useful for debugging the failure
             print(error.info())
             print(json.loads(error.read()))
+
+class Campaigns(APIView):
+    @csrf_exempt
+    def get(self, request, format=None):
+        # return all of the campaigns here :)
