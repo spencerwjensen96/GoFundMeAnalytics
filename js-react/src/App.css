@@ -37,3 +37,7 @@
   }
 }
 html { margin-left: calc(100vw - 100%); }
+
+input[type=range]::-webkit-slider-thumb {
+  background: #5cb85c;
+}
