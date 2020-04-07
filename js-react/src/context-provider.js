@@ -47,7 +47,7 @@ export default class AppProvider extends React.Component {
     render() {
         return (
             <AppContext.Provider value={{...this.state, ...this.actions}}>
-                <CalciteThemeProvider>
+                <CalciteThemeProvider theme={CustomTheme}>
                     <App />
                 </CalciteThemeProvider>
             </AppContext.Provider>

@@ -8,7 +8,8 @@ import LeftSide from './components/LeftSide.js';
 import Home from './components/Home.js';
 import Footer from './components/Footer.js';
 import RightSide from './components/RightSide';
-//import Search from './components/Search'
+import Search from './components/Search';
+
 
 function App() {
   return (
