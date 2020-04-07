@@ -11,7 +11,7 @@ from decimal import Decimal
 
 #create Campaign Objects, and add it to the database
 def createCampaigns():
-    with open('Cleaned_Campaigns_Encoded.csv', encoding='utf-8', errors='replace') as campCSV:
+    with open('Cleaned_Campaigns.csv', encoding='utf-8') as campCSV:
         data = csv.reader(campCSV, delimiter=',')
         
         # integer variables to access them in the rows (what array index are they stored at?)
@@ -82,6 +82,7 @@ def createCampaigns():
                 #     print(dbcamp.description)
                 # except:
                 #     print("description for ", dbcamp.title, " contains unknown chars")
+
                 try:
                     dbcamp.save()
                 except:
