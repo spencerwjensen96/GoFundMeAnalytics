@@ -32,15 +32,21 @@ def createCampaigns():
         percentCompleteForGivenDays = 37
         moneyPerDonor = 38
 
+        # number of rows that were unable to save to the database
+        numFails = 0
+
         for row in data:
             # print("row: ")
-            # print(row)
+            # try:
+            #     print(row)
+            # except:
+            #     print("can't read unicode char probably is the error")
             if(row[1] != 'Unnamed: 0'): # this skips the first row, we don't want to save the headers to our database
                 dbcamp = Campaign()
                 dbcamp.currentAmount = Decimal(row[currentAmount])
-                print('current amount', dbcamp.currentAmount)
+                # print('current amount', dbcamp.currentAmount)
                 dbcamp.daysActive = int(Decimal(row[daysActive]))
-                print('days active', dbcamp.daysActive)
+                # print('days active', dbcamp.daysActive)
                 dbcamp.goal = int(row[goal])
                 dbcamp.donators = int(row[donators])
                 dbcamp.title = row[title]
@@ -53,10 +59,42 @@ def createCampaigns():
                 dbcamp.campaignHearts = int(row[campaignHearts])
                 dbcamp.socialShareTotal = int(row[socialShareTotal])
                 dbcamp.percentComplete = Decimal(row[percentComplete])
+                if dbcamp.percentComplete == 'Infinity':
+                    print('percent complete = infinity error')
+                    dbcamp.percentComplete = 0.0
+                # print('percent complete', dbcamp.percentComplete)
                 dbcamp.percentCompleteForGivenDays = Decimal(row[percentCompleteForGivenDays])
+                if dbcamp.percentCompleteForGivenDays == 'Infinity':
+                    print('percent complete for given days = infinity error')
+                    dbcamp.percentCompleteForGivenDays = 0.0
+                # print('for given days', dbcamp.percentCompleteForGivenDays)
                 dbcamp.moneyPerDonor = Decimal(row[moneyPerDonor])
-                dbcamp.save()
-                print(dbcamp)
+                if dbcamp.moneyPerDonor == 'Infinity':
+                    print('money Per Donor= infinity error')
+                    dbcamp.moneyPerDonor = 0.0
+                # print('money per donor', dbcamp.moneyPerDonor)
+
+                # try:
+                #     print(dbcamp.title)
+                # except:
+                #     print("title for ", dbcamp.description, " contains unknown chars")
+                # try:
+                #     print(dbcamp.description)
+                # except:
+                #     print("description for ", dbcamp.title, " contains unknown chars")
+                try:
+                    dbcamp.save()
+                except:
+                    print("error saving", dbcamp.title, "to the database")
+                    numFails += 1
+
+                # print(dbcamp)
+            #end of if statement
+        print("finished saving campaigns to the database")
+        print("how many records failed to save?", numFails)
+        #end of for loop
+    #end of with open file stuff
+#end of create campaigns def
 
 def main():
     createCampaigns()
