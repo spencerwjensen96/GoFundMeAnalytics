@@ -10,6 +10,7 @@ import Footer from './components/Footer.js';
 import RightSide from './components/RightSide';
 import Search from './components/Search';
 
+
 function App() {
   return (
     <Router>
@@ -32,7 +33,7 @@ function App() {
                   <Home />
                 </Route>
                 <Route path="/search">
-                  <Search />
+                  {/* <Search /> */}
                 </Route>
                 <Route path="/">
                   <Home/>

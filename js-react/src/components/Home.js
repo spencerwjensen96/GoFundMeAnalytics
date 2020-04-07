@@ -102,7 +102,7 @@ const PaymentForm = props => {
                         <bs.Form.Label>Target Funding Goal</bs.Form.Label>
                         <Field component={Slider} name="goal" min={100} max={100000} step={100} 
                           className="form-control" 
-                          style={{ background: "#4CAF50;" }}/>
+                          style={{  }}/>
                         <FormHelperText>
                           ${props.form.values.goal}
                         </FormHelperText>
