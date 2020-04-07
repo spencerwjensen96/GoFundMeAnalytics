@@ -23,7 +23,7 @@ export default class AppProvider extends React.Component {
 
         }
         this.state = {
-
+            campaigns: {},
         }
     }
 

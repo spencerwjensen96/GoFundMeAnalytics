@@ -1,6 +1,7 @@
+# 3rd party imports
 from django.shortcuts import render
 import urllib
-# Create your views here.
+# If you are using Python 3+, import urllib instead of urllib2
 from django.http import Http404
 from django.views.decorators.csrf import csrf_exempt
 from rest_framework.views import APIView
@@ -8,9 +9,9 @@ from rest_framework.response import Response
 from rest_framework import status
 import json
 import time
-# If you are using Python 3+, import urllib instead of urllib2
-
-import json 
+#my imports
+from api.serializers import CampaignSerializer
+from api.models import Campaign
 
 # Create your views here.
 class LoanTest(APIView):
@@ -49,4 +50,8 @@ class LoanTest(APIView):
 class Campaigns(APIView):
     @csrf_exempt
     def get(self, request, format=None):
-        # return all of the campaigns here :)
+        campaigns = Campaign.objects.all()
+        if len(campaigns) > 0:
+            serializer = CampaignSerializer(campaigns, many=True)
+            return Response(serializer.data)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
