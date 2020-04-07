@@ -33,7 +33,7 @@ function App() {
                   <Home />
                 </Route>
                 <Route path="/search">
-                  {/* <Search /> */}
+                  <Search />
                 </Route>
                 <Route path="/">
                   <Home/>
