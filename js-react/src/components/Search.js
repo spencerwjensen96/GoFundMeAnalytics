@@ -6,7 +6,9 @@ import AppContext from '../context'
 export default function Search(props) {
 //let match = useRouteMatch('/qualityanalysis/:searchparams/');
 const context = useContext(AppContext)
+if(context.campaigns) {
   return(
+    <>
       <bs.Container fluid>
         <bs.Row>
           {Object.values(context.campaigns).map((camp) => {
@@ -18,7 +20,14 @@ const context = useContext(AppContext)
           })}
         </bs.Row>
       </bs.Container>
-    );
+    </>
+    );}
+else {
+  return (
+    <p>Campaigns failed to load from the API. Try refreshing the page, to reconnect to the campaigns database.</p>
+  );
+}
+
 }
 
 // filename={`${process.env.PUBLIC_URL}/media/products/${pro.filename}-1.png`}
