@@ -20,11 +20,11 @@ function App() {
             <Header />
           </bs.Col>
         </bs.Row>
-        <bs.Row style={{backgroundColor: 'lightgray'}}>
+        <bs.Row style={{backgroundColor: '#ECECEC'}}>
           <div><p></p></div>
         </bs.Row>
         <bs.Row noGutters className="flex-grow-1 shadow-sm">
-          <bs.Col md={2} style={{ backgroundColor: "lightgray"}} className="px-3 py-4" > 
+          <bs.Col md={2} style={{ backgroundColor: "#ECECEC"}} className="px-3 py-4" > 
             <LeftSide />
           </bs.Col>
           <bs.Col md={8} style={{ position: "relative", backgroundColor: "white", borderRadius: '3px', boxShadow: "-3px 5px 5px #9E9E9E"}} className="px-3 py-4" >
@@ -40,11 +40,11 @@ function App() {
                 </Route>
               </Switch>
           </bs.Col>
-          <bs.Col md={2} style={{ backgroundColor: "lightgray"}} className="px-3 py-4" > 
+          <bs.Col md={2} style={{ backgroundColor: "#ECECEC"}} className="px-3 py-4" > 
             <RightSide />
           </bs.Col>
         </bs.Row>
-        <bs.Row style={{backgroundColor: 'lightgray'}}>
+        <bs.Row style={{backgroundColor: '#ECECEC'}}>
           <div><p></p></div>
         </bs.Row>
         <bs.Row>

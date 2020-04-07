@@ -38,11 +38,7 @@ function CampaignDetails(props){
                 </Row>
                 <Row>
                     <h1>{camp.title}</h1>
-                    <ProgressBar>
-                        <ProgressBar variant="success" now={camp.percentComplete} key={1}/>
-                        <ProgressBar variant="warning" now={100 - camp.percentComplete} key={1}/>
-                    </ProgressBar>
-                    
+                    <ProgressBar style={{height: '10px'}} variant="success" now={camp.percentComplete} key={1}/>
                     <div className="inline">
                         <h4><b>${camp.currentAmount}</b></h4><h6>raised of ${camp.goal} goal</h6>
                     </div>
