@@ -14,7 +14,7 @@ function App() {
     <Router>
       <bs.Container fluid className="p-0 min-vh-100 d-flex flex-column">
         <bs.Row noGutters className="flex-grow-0 flex-shrink-0 shadow-lg">
-          <bs.Col md={12} style={{ backgroundColor: "white"/*#282C35 -light black "#121C1C" -dark black "#C15703" -orangey */}}>
+          <bs.Col md={12} style={{ backgroundColor: "white", boxShadow: "0px 2px 5px #9E9E9E"}}>
             <Header />
           </bs.Col>
         </bs.Row>
@@ -30,6 +30,9 @@ function App() {
                 <Route path="/home">
                   <Home />
                 </Route>
+                <Route path="/search">
+                  <Search />
+                </Route>
                 <Route path="/">
                   <Home/>
                 </Route>
@@ -42,8 +45,8 @@ function App() {
         <bs.Row style={{backgroundColor: 'lightgray'}}>
           <div><p></p></div>
         </bs.Row>
-        <bs.Row noGutters className="flex-grow-0 flex-shrink-0 shadow-lg">
-          <bs.Col md={12} style={{ backgroundColor: "gray"}}>
+        <bs.Row>
+          <bs.Col md={12} style={{ backgroundColor: "lightgray"}}>
             <Footer />
           </bs.Col>
         </bs.Row>
