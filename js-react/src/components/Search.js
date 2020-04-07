@@ -26,7 +26,7 @@ export default function Search(props) {
             const progress = camp.currentAmount / camp.goal * 100;
                 return (
                   <bs.Col md="4" key={camp.id}>
-                    <Card>
+                    <Card className="mb-3">
                       <div>
                           <Link to={`/CampaignDetails/${camp.id}`}><Card.Img variant="top" src={'https://bloximages.newyork1.vip.townnews.com/standard.net/content/tncms/assets/v3/editorial/4/77/47738102-9cab-57d3-8eef-0cdbbf1dbdeb/5b4fb6bfe21df.image.jpg?resize=1200%2C799'} alt={camp.name} /></Link>
                       </div>
