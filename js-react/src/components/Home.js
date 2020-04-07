@@ -16,10 +16,10 @@ export default function Home(props) {
               title: '',
               description: '',
               goal: 10000,
-              numdays: 1,
-              isCharity: 'Yes',
-              hasBeneficiary: 'Yes',
-              visibleInSearch: 'Yes',
+              daysActive: 1,
+              isCharity: true,
+              hasBeneficiary: true,
+              visibleInSearch: true,
             }}
             validateOnChange={false}
             validateOnBlur={false}
@@ -31,8 +31,8 @@ export default function Home(props) {
                 if(!values.description) {
                     errors.description = 'You must insert a description for you GoFundMe Project'
                 }
-                if(!values.numdays) {
-                    errors.numdays = 'You must insert # of days you plan on keeping you GoFundMe Project Online'
+                if(!values.daysActive) {
+                    errors.daysActive = 'You must insert # of days you plan on keeping you GoFundMe Project Online'
                 }
                 if(!values.isCharity) {
                     errors.isCharity = 'You must select whether your campaign is a charity or not'
@@ -43,8 +43,8 @@ export default function Home(props) {
                 if(!values.visibleInSearch) {
                     errors.visibleInSearch = 'You must select whether your campaign is public or private'
                 }
-                if(values.numdays && (values.numdays > 365 || values.numdays < 1)) {
-                    errors.numdays = 'Number of days must be between 1 and 365'
+                if(values.daysActive && (values.daysActive > 365 || values.daysActive < 1)) {
+                    errors.daysActive = 'Number of days must be between 1 and 365'
                 }
                 if(!values.goal) {
                     errors.goal = 'You must set a goal for your campaign'
@@ -53,19 +53,23 @@ export default function Home(props) {
                 return errors
             }}
             onSubmit={async (values) => {
-                let PostURL = 'http://localhost:8000/api/predictfunding/' // this is for local testing. Just comment and uncomment these lines as needed.
-                // let PostURL = '/api/predictfunding/' // this is for production/deployment
+                let PostURL = 'http://localhost:8000/api/predict/' // this is for local testing. Just comment and uncomment these lines as needed.
+                // let PostURL = '/api/predict/' // this is for production/deployment
                 let apiResponse = await axios.post(PostURL, {
                     'title': values.title,
                     'description': values.description,
-                    'numdays': values.numdays,
+                    'daysActive': values.daysActive,
                     'goal': values.goal,
                     'isCharity': values.isCharity,
                     'visibleInSearch': values.visibleInSearch,
                     'hasBeneficiary': values.hasBeneficiary,
                 })
-                console.log("Django response: ", apiResponse.data)                
-                history.push('/prediction');
+                console.log("Django response: ", apiResponse.data)
+                let predictedPercent = apiResponse.data['Results']['output1']['value']['values']['Scored Labels']
+                history.push({
+                    pathname: '/prediction',
+                    state: { calculatedPercentage: predictedPercent}
+                });
                 return;
             }}
         >{form => (
@@ -75,6 +79,7 @@ export default function Home(props) {
 }
 
 const PaymentForm = props => {
+    // corona virus. COVID-19. Help me. Money. Service. Firefighters. Police men. Nurses. Doctors. Healthcare workers.
   return(
         <>
         {/*console.log("issubmitting 2", props.isSubmitting)*/}
@@ -117,7 +122,7 @@ const PaymentForm = props => {
                         </Field>
 
                         {/*Slider goal*/}
-                        <bs.Form.Label className="pt-2">Target Funding Goal</bs.Form.Label>
+                        <bs.Form.Label className="pt-3">Target Funding Goal</bs.Form.Label>
                         <Field component={Slider} name="goal" min={100} max={100000} step={100} 
                           className="form-control" 
                           style={{  }}/>
@@ -125,12 +130,12 @@ const PaymentForm = props => {
                         ${props.form.values.goal} <br/>
                         </FormHelperText>
 
-                        {/*Slider numdays*/}
+                        {/*Slider daysActive*/}
                         <bs.Form.Label className="pt-2">How long do you plan on accepting donations?</bs.Form.Label>
-                        <Field component={Slider} name="numdays" min={1} max={365} step={1} 
+                        <Field component={Slider} name="daysActive" min={1} max={365} step={1} 
                           className="form-control" />
                         <FormHelperText className="text-success">
-                          {props.form.values.numdays} {props.form.values.numdays > 1 ? 'days' : 'day'} <br/><br/>
+                          {props.form.values.daysActive} {props.form.values.daysActive > 1 ? 'days' : 'day'} <br/><br/>
                         </FormHelperText>
 
                         {/*submit button*/}

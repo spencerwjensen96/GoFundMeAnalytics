@@ -22,3 +22,13 @@ class Campaign(models.Model):
     percentCompleteForGivenDays = models.TextField()
     moneyPerDonor = models.TextField()
     quality = models.TextField()
+
+class Predict(models.Model):
+    id = models.AutoField(primary_key=True) # this field is automatic, but I put it in here to show where our primary key comes from
+    title = models.TextField()
+    description = models.TextField()
+    goal = models.TextField()
+    daysActive = models.TextField()
+    hasBeneficiary = models.BooleanField()
+    isCharity = models.BooleanField()
+    visibleInSearch = models.BooleanField()
