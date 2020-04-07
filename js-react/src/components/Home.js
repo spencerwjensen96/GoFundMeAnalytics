@@ -4,6 +4,7 @@ import { Formik, Form, Field} from 'formik'
 import axios from 'axios'
 import { useHistory } from 'react-router-dom';
 import Slider from 'calcite-react/Slider'
+import { FormHelperText } from 'calcite-react/Form'
 
 
 export default function Home(props) {
@@ -21,41 +22,30 @@ export default function Home(props) {
     return (
         <Formik
             initialValues={{
-                name: '',
-                address1: '',
-                address2: '',
-                city: '',
-                state: '',
-                zipcode: '',
+              title: '',
+              goal: 10000,
+              name: '',
+              state: '',
+              zipcode: '',
             }}
             validateOnChange={false}
             validateOnBlur={false}
             validate={values => {
                 const errors = {}
-                if(!values.name) {
-                    errors.name = 'without your name, your package can\' be delivered'
+                if(!values.title) {
+                    errors.title = 'You must insert a title for you GoFundMe Project'
                 }
-                if(!values.address1) {
-                    errors.address1 = 'without your address, your package can\'t be delivered'
+                if(!values.description) {
+                    errors.description = 'You must insert a description for you GoFundMe Project'
                 }
-                if(!values.city) {
-                    errors.city = 'without your city, your package can\'t be delivered'
+                if(!values.numdays) {
+                    errors.numdays = 'You must insert # of days you plan on keeping you GoFundMe Project Online'
                 }
                 if(!values.state) {
-                    errors.state = 'without your state, your package can\'t be delivered'
+                    errors.state = 'You must select a state where your GoFundMe Project is based'
                 }
                 if(!values.zipcode) {
                     errors.zipcode = 'without your zipcode, your package can\'t be delivered'
-                }
-                //check if they changed values from the initial placeholder values
-                if(values.address2 === 'Watch out for my hammer ;)') {
-                    errors.address2 = 'when lightning strikes, be very careful...'
-                }
-                if(values.city === 'Asgard') {
-                    errors.city = 'Shipping to Asgard costs 2 tesarects, and payment is required in advance'
-                }
-                if(values.state === 'The Sky') {
-                    errors.state = 'Alternate shipping methods are needed. Please place your order by phone by calling: 224444'
                 }
                 if(values.zipcode && (values.zipcode.length > 10 || values.zipcode.length < 5)) {
                     errors.zipcode = 'zipcode must be between 5 and 10 characters'
@@ -75,15 +65,6 @@ export default function Home(props) {
                 let PostURL = 'http://localhost:8000/api/predictfunding/'
                 let apiResponse = await axios.post(PostURL, {
                     //values go here
-                    "name": values.name,
-                    "address1": values.address1,
-                    "address2": values.address2,
-                    "city": values.city,
-                    "state": values.state,
-                    "zipcode": values.zipcode,
-                    "total": 0,
-                    "items": {},
-                    "payment_intent": {}
                 })
                 console.log("Django response: ", apiResponse.data)                
                 history.push('/prediction');
@@ -94,22 +75,6 @@ export default function Home(props) {
     )
 }
 
-
-const options = [
-  {
-    "value": "WI", "label": "Wisconsin"
-  },
-  {
-    "value": "WY", "label": "Wyoming"
-  }
-]
-
-/**
- * The form layout/html.
- * This component needs finishing.
- */
-
-
 const PaymentForm = props => {
   return(
         <>
@@ -117,12 +82,13 @@ const PaymentForm = props => {
     <bs.Container fluid className="p-0 flex-column">
         <Form>
         <bs.Row noGutters className="flex-grow-0 flex-shrink-0">
-                <bs.Col md={6} className="p-1">
-                        <p>Shipping and Billing Address</p>
-                        <Input title="Name:" name="name" type="text" />
-                        <Input title="Address Line 1:" name="address1" type="text" />
-                        <Input title="(Optional) Address Line 2:" name="address2" type="text" />
-                        <Input title="City:" name="city" type="text" />
+                <bs.Col md={12} className="p-1">
+                        <p>Go Fund Me Campaign Details</p>
+                        <Input title="Title" name="title" type="text" />
+                        <Input title="Description" name="description" type="text" />
+                        <Input title="Number of Days" name="numdays" type="text" />
+
+                        {/*Dropdown*/}
                         <bs.Form.Label>State</bs.Form.Label>
                         <Field name="State" as="select" placeholder="Wyoming" className="form-control">
                           {options.map((option) =>
@@ -131,18 +97,22 @@ const PaymentForm = props => {
                             </option>
                             )}
                         </Field>
-                        <bs.Form.Label>Slider</bs.Form.Label>
-                        <Field component={Slider} name="volume" />
+
+                        {/*Slider*/}
+                        <bs.Form.Label>Target Funding Goal</bs.Form.Label>
+                        <Field component={Slider} name="goal" min={100} max={100000} step={100} className="form-control" ></Field>
+                        <FormHelperText>
+                          ${props.form.values.goal}
+                        </FormHelperText>
+
                         <Input title="Zip Code:" name="zipcode" type="text" />
-                </bs.Col>
-                <bs.Col md={6} className="p-1">
-                    <p hidden={props.hideError} className='text-danger'></p>
-                    <p>Your Card will be charged:</p>
-                    <bs.Button 
+
+                        {/*submit button*/}
+                        <bs.Button 
                         variant='warning' 
                         disabled={props.form.isSubmitting}
                         onClick={() => {
-                            props.form.submitForm(); 
+                            props.form.submitForm();
                         }}>
                             <bs.Spinner 
                                 animation="border" 
@@ -151,8 +121,9 @@ const PaymentForm = props => {
                                 size="sm"
                                 aria-hidden={true}
                                 hidden={!props.form.isSubmitting} /> 
-                        Place Your Order</bs.Button>
+                        Predict Your Future ;)</bs.Button>
                 </bs.Col>
+
         </bs.Row>
         </Form>
     </bs.Container>
@@ -184,5 +155,243 @@ const Input = (props) => (
             }
         </bs.Form.Group>
     )}</Field>
-)
+);
 
+const options = [
+  {
+      "label": "Alabama",
+      "value": "AL"
+  },
+  {
+      "label": "Alaska",
+      "value": "AK"
+  },
+  {
+      "label": "American Samoa",
+      "value": "AS"
+  },
+  {
+      "label": "Arizona",
+      "value": "AZ"
+  },
+  {
+      "label": "Arkansas",
+      "value": "AR"
+  },
+  {
+      "label": "California",
+      "value": "CA"
+  },
+  {
+      "label": "Colorado",
+      "value": "CO"
+  },
+  {
+      "label": "Connecticut",
+      "value": "CT"
+  },
+  {
+      "label": "Delaware",
+      "value": "DE"
+  },
+  {
+      "label": "District Of Columbia",
+      "value": "DC"
+  },
+  {
+      "label": "Federated States Of Micronesia",
+      "value": "FM"
+  },
+  {
+      "label": "Florida",
+      "value": "FL"
+  },
+  {
+      "label": "Georgia",
+      "value": "GA"
+  },
+  {
+      "label": "Guam Gu",
+      "value": "GU"
+  },
+  {
+      "label": "Hawaii",
+      "value": "HI"
+  },
+  {
+      "label": "Idaho",
+      "value": "ID"
+  },
+  {
+      "label": "Illinois",
+      "value": "IL"
+  },
+  {
+      "label": "Indiana",
+      "value": "IN"
+  },
+  {
+      "label": "Iowa",
+      "value": "IA"
+  },
+  {
+      "label": "Kansas",
+      "value": "KS"
+  },
+  {
+      "label": "Kentucky",
+      "value": "KY"
+  },
+  {
+      "label": "Louisiana",
+      "value": "LA"
+  },
+  {
+      "label": "Maine",
+      "value": "ME"
+  },
+  {
+      "label": "Marshall Islands",
+      "value": "MH"
+  },
+  {
+      "label": "Maryland",
+      "value": "MD"
+  },
+  {
+      "label": "Massachusetts",
+      "value": "MA"
+  },
+  {
+      "label": "Michigan",
+      "value": "MI"
+  },
+  {
+      "label": "Minnesota",
+      "value": "MN"
+  },
+  {
+      "label": "Mississippi",
+      "value": "MS"
+  },
+  {
+      "label": "Missouri",
+      "value": "MO"
+  },
+  {
+      "label": "Montana",
+      "value": "MT"
+  },
+  {
+      "label": "Nebraska",
+      "value": "NE"
+  },
+  {
+      "label": "Nevada",
+      "value": "NV"
+  },
+  {
+      "label": "New Hampshire",
+      "value": "NH"
+  },
+  {
+      "label": "New Jersey",
+      "value": "NJ"
+  },
+  {
+      "label": "New Mexico",
+      "value": "NM"
+  },
+  {
+      "label": "New York",
+      "value": "NY"
+  },
+  {
+      "label": "North Carolina",
+      "value": "NC"
+  },
+  {
+      "label": "North Dakota",
+      "value": "ND"
+  },
+  {
+      "label": "Northern Mariana Islands",
+      "value": "MP"
+  },
+  {
+      "label": "Ohio",
+      "value": "OH"
+  },
+  {
+      "label": "Oklahoma",
+      "value": "OK"
+  },
+  {
+      "label": "Oregon",
+      "value": "OR"
+  },
+  {
+      "label": "Palau",
+      "value": "PW"
+  },
+  {
+      "label": "Pennsylvania",
+      "value": "PA"
+  },
+  {
+      "label": "Puerto Rico",
+      "value": "PR"
+  },
+  {
+      "label": "Rhode Island",
+      "value": "RI"
+  },
+  {
+      "label": "South Carolina",
+      "value": "SC"
+  },
+  {
+      "label": "South Dakota",
+      "value": "SD"
+  },
+  {
+      "label": "Tennessee",
+      "value": "TN"
+  },
+  {
+      "label": "Texas",
+      "value": "TX"
+  },
+  {
+      "label": "Utah",
+      "value": "UT"
+  },
+  {
+      "label": "Vermont",
+      "value": "VT"
+  },
+  {
+      "label": "Virgin Islands",
+      "value": "VI"
+  },
+  {
+      "label": "Virginia",
+      "value": "VA"
+  },
+  {
+      "label": "Washington",
+      "value": "WA"
+  },
+  {
+      "label": "West Virginia",
+      "value": "WV"
+  },
+  {
+      "label": "Wisconsin",
+      "value": "WI"
+  },
+  {
+      "label": "Wyoming",
+      "value": "WY"
+  }
+]
