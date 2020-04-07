@@ -10,7 +10,7 @@ return(
         <bs.Col md={2}>
           <bs.Navbar.Brand href="/" style={{color: 'green'}}>Go Fund Me Analytics</bs.Navbar.Brand>
         </bs.Col>
-        <bs.Col md={8} block>
+        <bs.Col md={8}>
           <bs.Form inline>
             <bs.FormControl style={{width: '80%'}} type="text" placeholder="Search"  />
             <bs.Button variant="outline-success">Search</bs.Button>

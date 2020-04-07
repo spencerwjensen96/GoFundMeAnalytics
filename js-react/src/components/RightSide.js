@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default function LeftSide(props) {
+export default function RightSide(props) {
 
   return (
     <div>
