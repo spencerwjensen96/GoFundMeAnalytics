@@ -1,8 +1,9 @@
-import React, { useContext } from 'react';
+import React from 'react';
+// import { useContext } from 'react';
 import * as bs from 'react-bootstrap';
 import {CardDeck, Card, ProgressBar} from 'react-bootstrap'
 // import {useRouteMatch} from "react-router-dom";
-import AppContext from '../context'
+// import AppContext from '../context'
 import {
   Link
 } from "react-router-dom";
@@ -15,7 +16,7 @@ const desc = {'font-family': 'Roboto', 'font-size': '17px'}
 
 export default function Search(props) {
 //let match = useRouteMatch('/qualityanalysis/:searchparams/');
-const context = useContext(AppContext)
+// const context = useContext(AppContext)
 // if(context.campaigns) {
   return(
     <>
