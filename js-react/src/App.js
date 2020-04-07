@@ -7,6 +7,7 @@ import Header from './components/Header.js';
 import LeftSide from './components/LeftSide.js';
 import Home from './components/Home.js';
 import Footer from './components/Footer.js';
+import RightSide from './components/RightSide';
 
 function App() {
   return (
@@ -17,11 +18,14 @@ function App() {
             <Header />
           </bs.Col>
         </bs.Row>
+        <bs.Row style={{backgroundColor: 'lightgray'}}>
+          <div><p></p></div>
+        </bs.Row>
         <bs.Row noGutters className="flex-grow-1 shadow-sm">
-          <bs.Col md={3} style={{ backgroundColor: "gray"}} className="px-3 py-4" > 
+          <bs.Col md={2} style={{ backgroundColor: "lightgray"}} className="px-3 py-4" > 
             <LeftSide />
           </bs.Col>
-          <bs.Col md={9} style={{ position: "relative", backgroundColor: "white"}} className="px-3 py-4" >
+          <bs.Col md={8} style={{ position: "relative", backgroundColor: "white", borderRadius: '3px', boxShadow: "-3px 5px 5px #9E9E9E"}} className="px-3 py-4" >
               <Switch>
                 <Route path="/home">
                   <Home />
@@ -31,6 +35,12 @@ function App() {
                 </Route>
               </Switch>
           </bs.Col>
+          <bs.Col md={2} style={{ backgroundColor: "lightgray"}} className="px-3 py-4" > 
+            <RightSide />
+          </bs.Col>
+        </bs.Row>
+        <bs.Row style={{backgroundColor: 'lightgray'}}>
+          <div><p></p></div>
         </bs.Row>
         <bs.Row noGutters className="flex-grow-0 flex-shrink-0 shadow-lg">
           <bs.Col md={12} style={{ backgroundColor: "gray"}}>
