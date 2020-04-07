@@ -38,6 +38,14 @@
 }
 html { margin-left: calc(100vw - 100%); }
 
+
 input[type=range]::-webkit-slider-thumb {
-  background: #5cb85c;
+  background: #5cb85c !important;
+  border:#5cb85c !important; 
 }
+
+input[type=range]::-moz-range-thumb {
+  background: #5cb85c !important;
+  border:#5cb85c !important; 
+}
+
