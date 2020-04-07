@@ -9,6 +9,7 @@ import Home from './components/Home.js';
 import Footer from './components/Footer.js';
 import RightSide from './components/RightSide';
 import Search from './components/Search';
+import Prediction from './components/Prediction';
 
 
 function App() {
@@ -34,6 +35,9 @@ function App() {
                 </Route>
                 <Route path="/search">
                   <Search />
+                </Route>
+                <Route path="/prediction">
+                  <Prediction />
                 </Route>
                 <Route path="/">
                   <Home/>
