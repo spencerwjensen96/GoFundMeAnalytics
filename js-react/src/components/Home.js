@@ -7,19 +7,26 @@ import Slider from 'calcite-react/Slider'
 import { FormHelperText } from 'calcite-react/Form'
 
 
-export default function Home(props) {    
+export default function Home(props) {
+
+    //these are to get the current month/year for the expiration date tests in payment_intent
+    let today = new Date();
+    const mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+    const yyyy = today.getFullYear();
+    
     //useHistory react stuff
     let history = useHistory();
+
+    today = mm + '/' + yyyy;
+
     return (
         <Formik
             initialValues={{
               title: '',
-              description: '',
               goal: 10000,
-              daysActive: 1,
-              isCharity: true,
-              hasBeneficiary: true,
-              visibleInSearch: true,
+              name: '',
+              state: '',
+              zipcode: '',
             }}
             validateOnChange={false}
             validateOnBlur={false}
@@ -31,54 +38,36 @@ export default function Home(props) {
                 if(!values.description) {
                     errors.description = 'You must insert a description for you GoFundMe Project'
                 }
-                if(!values.daysActive) {
-                    errors.daysActive = 'You must insert # of days you plan on keeping you GoFundMe Project Online'
+                if(!values.numdays) {
+                    errors.numdays = 'You must insert # of days you plan on keeping you GoFundMe Project Online'
                 }
-                if(!values.isCharity) {
-                    errors.isCharity = 'You must select whether your campaign is a charity or not'
+                if(!values.state) {
+                    errors.state = 'You must select a state where your GoFundMe Project is based'
                 }
-                if(!values.hasBeneficiary) {
-                    errors.hasBeneficiary = 'You must select whether your campaign has a beneficiary or not'
+                if(!values.zipcode) {
+                    errors.zipcode = 'without your zipcode, your package can\'t be delivered'
                 }
-                if(!values.visibleInSearch) {
-                    errors.visibleInSearch = 'You must select whether your campaign is public or private'
+                if(values.zipcode && (values.zipcode.length > 10 || values.zipcode.length < 5)) {
+                    errors.zipcode = 'zipcode must be between 5 and 10 characters'
                 }
-                if(values.daysActive && (values.daysActive > 365 || values.daysActive < 1)) {
-                    errors.daysActive = 'Number of days must be between 1 and 365'
+                //making sure the zipcode contains only #'s and/or dashes
+                if(values.zipcode) {
+                    const numberArr = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
+                    for(let i = 0; i < values.zipcode.length; i++) {
+                        if(values.zipcode[i] !== '-' && !(values.zipcode[i] in numberArr)) {
+                            errors.zipcode = 'zipcodes can only contain numbers and dashes "-"'
+                        }
+                    }
                 }
-                if(!values.goal) {
-                    errors.goal = 'You must set a goal for your campaign'
-                }
-
                 return errors
             }}
             onSubmit={async (values) => {
-                let PostURL = 'http://localhost:8000/api/predict/' // this is for local testing. Just comment and uncomment these lines as needed.
-                // let PostURL = '/api/predict/' // this is for production/deployment
+                let PostURL = 'http://localhost:8000/api/predictfunding/'
                 let apiResponse = await axios.post(PostURL, {
-                    'title': values.title,
-                    'description': values.description,
-                    'daysActive': values.daysActive,
-                    'goal': values.goal,
-                    'isCharity': values.isCharity,
-                    'visibleInSearch': values.visibleInSearch,
-                    'hasBeneficiary': values.hasBeneficiary,
+                    //values go here
                 })
-                const azureResponse = JSON.parse(apiResponse.data)
-                const scoredLabelsIndex = azureResponse.Results.output1.value.ColumnNames.indexOf('Scored Labels')
-                if(scoredLabelsIndex === -1) {
-                    history.push({
-                        pathname: '/error',
-                        state: { error: 'Scored Labels not found in the API response from Azure' }
-                    })
-                    return;
-                }
-                const predictedPercent = azureResponse.Results.output1.value.Values[0][scoredLabelsIndex]
-                history.push({
-                    pathname: '/prediction',
-                    calculatedPercent: predictedPercent,
-                });
-                return;
+                console.log("Django response: ", apiResponse.data)                
+                history.push('/prediction');
             }}
         >{form => (
             <PaymentForm form={form} />
@@ -87,7 +76,6 @@ export default function Home(props) {
 }
 
 const PaymentForm = props => {
-    // corona virus. COVID-19. Help me. Money. Service. Firefighters. Police men. Nurses. Doctors. Healthcare workers.
   return(
         <>
         {/*console.log("issubmitting 2", props.isSubmitting)*/}
@@ -98,10 +86,11 @@ const PaymentForm = props => {
                         <p>Go Fund Me Campaign Details</p>
                         <Input title="Title" name="title" type="text" />
                         <Input title="Description" name="description" type="text" />
+                        <Input title="Number of Days" name="numdays" type="text" />
 
-                        {/*Dropdown is charity*/}
-                        <bs.Form.Label className="pt-2">Is your campaign a charity?</bs.Form.Label>
-                        <Field name="isCharity" as="select" placeholder="Yes" className="form-control">
+                        {/*Dropdown*/}
+                        <bs.Form.Label>State</bs.Form.Label>
+                        <Field name="State" as="select" placeholder="Wyoming" className="form-control">
                           {options.map((option) =>
                             <option key={option.label} value={option.value}>
                               {option.label}
@@ -109,42 +98,16 @@ const PaymentForm = props => {
                             )}
                         </Field>
 
-                        {/*Dropdown has beneficiary*/}
-                        <bs.Form.Label className="pt-2">Does your campaign have a beneficiary?</bs.Form.Label>
-                        <Field name="hasBeneficiary" as="select" placeholder="Yes" className="form-control">
-                          {options.map((option) =>
-                            <option key={option.label} value={option.value}>
-                              {option.label}
-                            </option>
-                            )}
-                        </Field>
-
-                        {/*Dropdown visible in search*/}
-                        <bs.Form.Label className="pt-2">Is your campaign public?</bs.Form.Label>
-                        <Field name="visibleInSearch" as="select" placeholder="Yes" className="form-control">
-                          {options.map((option) =>
-                            <option key={option.label} value={option.value}>
-                              {option.label}
-                            </option>
-                            )}
-                        </Field>
-
-                        {/*Slider goal*/}
-                        <bs.Form.Label className="pt-3">Target Funding Goal</bs.Form.Label>
+                        {/*Slider*/}
+                        <bs.Form.Label>Target Funding Goal</bs.Form.Label>
                         <Field component={Slider} name="goal" min={100} max={100000} step={100} 
                           className="form-control" 
                           style={{  }}/>
-                        <FormHelperText className="text-success">
-                        ${props.form.values.goal} <br/>
+                        <FormHelperText>
+                          ${props.form.values.goal}
                         </FormHelperText>
 
-                        {/*Slider daysActive*/}
-                        <bs.Form.Label className="pt-2">How long do you plan on accepting donations?</bs.Form.Label>
-                        <Field component={Slider} name="daysActive" min={1} max={365} step={1} 
-                          className="form-control" />
-                        <FormHelperText className="text-success">
-                          {props.form.values.daysActive} {props.form.values.daysActive > 1 ? 'days' : 'day'} <br/><br/>
-                        </FormHelperText>
+                        <Input title="Zip Code:" name="zipcode" type="text" />
 
                         {/*submit button*/}
                         <bs.Button 
@@ -160,7 +123,8 @@ const PaymentForm = props => {
                                 size="sm"
                                 aria-hidden={true}
                                 hidden={!props.form.isSubmitting} /> 
-                        Predict Your Success</bs.Button>
+                        Predict Your Future ;)</bs.Button>
+                        {/* Another button here that links you to the GoFundMe site to create your fundraiser.*/}
                 </bs.Col>
 
         </bs.Row>
@@ -197,6 +161,240 @@ const Input = (props) => (
 );
 
 const options = [
- {"label": "Yes", "value": true},
- {"label": "No", "value": false}
+  {
+      "label": "Alabama",
+      "value": "AL"
+  },
+  {
+      "label": "Alaska",
+      "value": "AK"
+  },
+  {
+      "label": "American Samoa",
+      "value": "AS"
+  },
+  {
+      "label": "Arizona",
+      "value": "AZ"
+  },
+  {
+      "label": "Arkansas",
+      "value": "AR"
+  },
+  {
+      "label": "California",
+      "value": "CA"
+  },
+  {
+      "label": "Colorado",
+      "value": "CO"
+  },
+  {
+      "label": "Connecticut",
+      "value": "CT"
+  },
+  {
+      "label": "Delaware",
+      "value": "DE"
+  },
+  {
+      "label": "District Of Columbia",
+      "value": "DC"
+  },
+  {
+      "label": "Federated States Of Micronesia",
+      "value": "FM"
+  },
+  {
+      "label": "Florida",
+      "value": "FL"
+  },
+  {
+      "label": "Georgia",
+      "value": "GA"
+  },
+  {
+      "label": "Guam Gu",
+      "value": "GU"
+  },
+  {
+      "label": "Hawaii",
+      "value": "HI"
+  },
+  {
+      "label": "Idaho",
+      "value": "ID"
+  },
+  {
+      "label": "Illinois",
+      "value": "IL"
+  },
+  {
+      "label": "Indiana",
+      "value": "IN"
+  },
+  {
+      "label": "Iowa",
+      "value": "IA"
+  },
+  {
+      "label": "Kansas",
+      "value": "KS"
+  },
+  {
+      "label": "Kentucky",
+      "value": "KY"
+  },
+  {
+      "label": "Louisiana",
+      "value": "LA"
+  },
+  {
+      "label": "Maine",
+      "value": "ME"
+  },
+  {
+      "label": "Marshall Islands",
+      "value": "MH"
+  },
+  {
+      "label": "Maryland",
+      "value": "MD"
+  },
+  {
+      "label": "Massachusetts",
+      "value": "MA"
+  },
+  {
+      "label": "Michigan",
+      "value": "MI"
+  },
+  {
+      "label": "Minnesota",
+      "value": "MN"
+  },
+  {
+      "label": "Mississippi",
+      "value": "MS"
+  },
+  {
+      "label": "Missouri",
+      "value": "MO"
+  },
+  {
+      "label": "Montana",
+      "value": "MT"
+  },
+  {
+      "label": "Nebraska",
+      "value": "NE"
+  },
+  {
+      "label": "Nevada",
+      "value": "NV"
+  },
+  {
+      "label": "New Hampshire",
+      "value": "NH"
+  },
+  {
+      "label": "New Jersey",
+      "value": "NJ"
+  },
+  {
+      "label": "New Mexico",
+      "value": "NM"
+  },
+  {
+      "label": "New York",
+      "value": "NY"
+  },
+  {
+      "label": "North Carolina",
+      "value": "NC"
+  },
+  {
+      "label": "North Dakota",
+      "value": "ND"
+  },
+  {
+      "label": "Northern Mariana Islands",
+      "value": "MP"
+  },
+  {
+      "label": "Ohio",
+      "value": "OH"
+  },
+  {
+      "label": "Oklahoma",
+      "value": "OK"
+  },
+  {
+      "label": "Oregon",
+      "value": "OR"
+  },
+  {
+      "label": "Palau",
+      "value": "PW"
+  },
+  {
+      "label": "Pennsylvania",
+      "value": "PA"
+  },
+  {
+      "label": "Puerto Rico",
+      "value": "PR"
+  },
+  {
+      "label": "Rhode Island",
+      "value": "RI"
+  },
+  {
+      "label": "South Carolina",
+      "value": "SC"
+  },
+  {
+      "label": "South Dakota",
+      "value": "SD"
+  },
+  {
+      "label": "Tennessee",
+      "value": "TN"
+  },
+  {
+      "label": "Texas",
+      "value": "TX"
+  },
+  {
+      "label": "Utah",
+      "value": "UT"
+  },
+  {
+      "label": "Vermont",
+      "value": "VT"
+  },
+  {
+      "label": "Virgin Islands",
+      "value": "VI"
+  },
+  {
+      "label": "Virginia",
+      "value": "VA"
+  },
+  {
+      "label": "Washington",
+      "value": "WA"
+  },
+  {
+      "label": "West Virginia",
+      "value": "WV"
+  },
+  {
+      "label": "Wisconsin",
+      "value": "WI"
+  },
+  {
+      "label": "Wyoming",
+      "value": "WY"
+  }
 ]
