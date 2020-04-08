@@ -38,6 +38,7 @@ function App() {
                 </Route>
                 <Route path="/CampaignDash">
                   <LineGraph />
+                </Route>
                 <Route path="/prediction">
                   <Prediction />
                 </Route>
