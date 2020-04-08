@@ -1,7 +1,7 @@
 import React from 'react';
 // import { useContext } from 'react';
 import * as bs from 'react-bootstrap';
-import {CardDeck, Card, ProgressBar} from 'react-bootstrap'
+import {CardDeck, Card, ProgressBar, Accordion, Button } from 'react-bootstrap'
 // import {useRouteMatch} from "react-router-dom";
 // import AppContext from '../context'
 import {
@@ -13,6 +13,9 @@ const greenText = {color: '#32b80d', 'font-family': 'Roboto Condensed'}
 const title = {'font-family': 'Roboto', 'font-size': '17px', color: '#141414'}
 const desc = {'font-family': 'Roboto', 'font-size': '17px'}
 
+function handleClick(e) {
+  alert("serach for something");
+}
 
 export default function Search(props) {
 //let match = useRouteMatch('/qualityanalysis/:searchparams/');
@@ -20,6 +23,38 @@ export default function Search(props) {
 // if(context.campaigns) {
   return(
     <>
+    <Accordion defaultActiveKey="0" className="mx-3 px-3">
+      <Card>
+          <Accordion.Toggle style={{'display': 'block'}} as={Card.Header} variant="link" eventKey="0">
+            
+            <bs.Form inline style={{'display': 'inline'}}>
+              <h3 className='mt-3' style={{'display': 'inline'}}>Search Filters</h3>
+              <bs.Button className='m-1' style={{float: 'right', 'display': 'inline'}} variant="outline-success" onClick={() => handleClick()}>Search</bs.Button>
+              <bs.FormControl style={{float: 'right', width: '30%', 'display': 'inline'}} type="text" placeholder="Search" className="m-1" />
+            </bs.Form>
+          </Accordion.Toggle>
+        <Accordion.Collapse eventKey="0">
+          <Card.Body>
+          <div>
+            <input className="mx-1" type="radio" value="option1" name="radio-group"/>
+            <label className="pr-3">City</label>
+
+            <input className="mx-1" type="radio" value="option2" name="radio-group"/>
+            <label className="pr-3"> State </label>
+
+            <input className="mx-1" type="radio" value="option3" name="radio-group"/>
+            <label className="pr-3"> Country </label>
+            
+            <input className="mx-1" type="radio" value="option4" name="radio-group"/>
+            <label className="pr-3"> Campaign Quality </label>   
+            
+            <input className="mx-1" type="radio" value="option5" name="radio-group"/>
+            <label className="pr-3"> Campaign Title </label>
+          </div>
+          </Card.Body>
+        </Accordion.Collapse>
+      </Card>
+    </Accordion> <br></br>
       <CardDeck className="row-cols-3">
           {/* {Object.values(context.campaigns).map((camp) => { */}
           {Object.values(Campaigns).map((camp) => {
@@ -28,7 +63,7 @@ export default function Search(props) {
                   <bs.Col md="4" key={camp.id}>
                     <Card className="mb-3">
                       <div>
-                          <Link to={`/CampaignDetails/${camp.id}`}><Card.Img variant="top" src={'https://bloximages.newyork1.vip.townnews.com/standard.net/content/tncms/assets/v3/editorial/4/77/47738102-9cab-57d3-8eef-0cdbbf1dbdeb/5b4fb6bfe21df.image.jpg?resize=1200%2C799'} alt={camp.name} /></Link>
+                        <Link to={`/CampaignDetails/${camp.id}`}><Card.Img variant="top" src={'https://bloximages.newyork1.vip.townnews.com/standard.net/content/tncms/assets/v3/editorial/4/77/47738102-9cab-57d3-8eef-0cdbbf1dbdeb/5b4fb6bfe21df.image.jpg?resize=1200%2C799'} alt={camp.name} /></Link>
                       </div>
                       <Card.Footer>
                           <h6 class="card-subtitle mb-2 text-muted"><strong style={greenText}>{camp.location.toUpperCase()}</strong></h6>
