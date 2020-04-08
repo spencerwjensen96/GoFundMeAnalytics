@@ -2,7 +2,7 @@ import React from 'react';
 // import { useContext } from 'react';
 import * as bs from 'react-bootstrap';
 import {CardDeck, Card, ProgressBar, Accordion, Button } from 'react-bootstrap'
-// import {useRouteMatch} from "react-router-dom";
+import {useHistory} from "react-router-dom";
 // import AppContext from '../context'
 import {
   Link
@@ -13,46 +13,54 @@ const greenText = {color: '#32b80d', 'font-family': 'Roboto Condensed'}
 const title = {'font-family': 'Roboto', 'font-size': '17px', color: '#141414'}
 const desc = {'font-family': 'Roboto', 'font-size': '17px'}
 
-function handleClick(e) {
-  alert("serach for something");
-}
+
 
 export default function Search(props) {
 //let match = useRouteMatch('/qualityanalysis/:searchparams/');
 // const context = useContext(AppContext)
 // if(context.campaigns) {
+
+  const history = useHistory();
+
+  function handleClick(e) {
+    e.preventDefault();
+    e.target.search.name = e.target.radiogroup.value
+    history.push("/search/")
+    history.push(`?${e.target.radiogroup.value}=${e.target.search.value}`)
+  }
+
   return(
     <>
     <Accordion defaultActiveKey="0" className="mx-3 px-3">
       <Card>
+      <bs.Form inline style={{'display': 'inline'}} onSubmit={(e) => handleClick(e)}>
           <Accordion.Toggle style={{'display': 'block'}} as={Card.Header} variant="link" eventKey="0">
-            
-            <bs.Form inline style={{'display': 'inline'}}>
               <h3 className='mt-3' style={{'display': 'inline'}}>Search Filters</h3>
-              <bs.Button className='m-1' style={{float: 'right', 'display': 'inline'}} variant="outline-success" onClick={() => handleClick()}>Search</bs.Button>
-              <bs.FormControl style={{float: 'right', width: '30%', 'display': 'inline'}} type="text" placeholder="Search" className="m-1" />
-            </bs.Form>
+              <bs.Button className='m-1' style={{float: 'right', 'display': 'inline'}} variant="outline-success" type="submit">Search</bs.Button>
+              <bs.FormControl name="search" style={{float: 'right', width: '30%', 'display': 'inline'}} type="text" placeholder="Search" className="m-1" />
+            
           </Accordion.Toggle>
         <Accordion.Collapse eventKey="0">
           <Card.Body>
           <div>
-            <input className="mx-1" type="radio" value="option1" name="radio-group"/>
+            <input className="mx-1" type="radio" value="city" name="radiogroup"/>
             <label className="pr-3">City</label>
 
-            <input className="mx-1" type="radio" value="option2" name="radio-group"/>
+            <input className="mx-1" type="radio" value="state" name="radiogroup"/>
             <label className="pr-3"> State </label>
 
-            <input className="mx-1" type="radio" value="option3" name="radio-group"/>
+            <input className="mx-1" type="radio" value="country" name="radiogroup"/>
             <label className="pr-3"> Country </label>
             
-            <input className="mx-1" type="radio" value="option4" name="radio-group"/>
+            <input className="mx-1" type="radio" value="quality" name="radiogroup"/>
             <label className="pr-3"> Campaign Quality </label>   
             
-            <input className="mx-1" type="radio" value="option5" name="radio-group"/>
+            <input className="mx-1" type="radio" value="title" name="radiogroup"/>
             <label className="pr-3"> Campaign Title </label>
           </div>
           </Card.Body>
         </Accordion.Collapse>
+        </bs.Form>
       </Card>
     </Accordion> <br></br>
       <CardDeck className="row-cols-3">

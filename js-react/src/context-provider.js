@@ -1,5 +1,5 @@
 import React from 'react'
-// import axios from 'axios'
+import axios from 'axios'
 import AppContext from './context'
 import App from './App'
 import CalciteThemeProvider, { CalciteTheme } from 'calcite-react/CalciteThemeProvider';
@@ -29,19 +29,12 @@ export default class AppProvider extends React.Component {
     async componentDidMount() {
         // We need to load in all the campaigns here but not the analytics. That should be called during the button onClick().
         // this is where we make our axios API calls
-        // const resp = await axios.get('http://localhost:8000/api/category/')
-        // const resp2 = await axios.get('http://localhost:8000/api/product/')
-        // for(const p of resp2.data) {
-        //     sum++
-        //     prods[p.id] = p
-        //     cats[p.category].count = Number((cats[p.category].count || 0) + 1)
-        // }
-        // this.setState({
-        //     ...this.state,
-        //     products: prods,
-        // })
-        // console.log('hello', resp.data, resp2.data) this works now
-        //this.setState({...this.state, categories: resp.data, products: resp2.data})
+        const resp = await axios.get('http://localhost:8000/api/campaigns/')
+
+        this.setState({
+            ...this.state,
+            campaigns: resp.data,
+        })
     }
 
     render() {
