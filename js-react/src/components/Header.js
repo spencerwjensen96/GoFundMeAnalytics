@@ -37,7 +37,7 @@ return(
         <bs.Col md={1}>
           <bs.Nav className="justify-content-end" activeKey="/home">
             <bs.Nav.Item>
-              <bs.Nav.Link href="/login">Log In</bs.Nav.Link>
+              <bs.Nav.Link href="https://www.gofundme.com/sign-in" target="_blank">Log In</bs.Nav.Link>
             </bs.Nav.Item>
           </bs.Nav>
         </bs.Col>

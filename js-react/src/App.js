@@ -11,6 +11,7 @@ import RightSide from './components/RightSide';
 import Search from './components/Search';
 import CampaignDashboard from './components/CampaignDashboard';
 import Prediction from './components/Prediction';
+import NotFound from './components/NotFound'
 
 function App() {
   return (
@@ -44,6 +45,9 @@ function App() {
                 </Route>
                 <Route path="/">
                   <Home/>
+                </Route>
+                <Route path="/not-found">
+                  <NotFound/>
                 </Route>
               </Switch>
           </bs.Col>
