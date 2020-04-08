@@ -34,8 +34,8 @@ def createCampaigns():
         percentComplete = 36
         percentCompleteForGivenDays = 37
         moneyPerDonor = 38
-        quality = 51
-        locationState = 52
+        quality = 55
+        locationState = 56
 
         # number of rows that were unable to save to the database
         numFails = 0
@@ -58,6 +58,9 @@ def createCampaigns():
                 dbcamp.campaignHearts = row[campaignHearts]
                 dbcamp.socialShareTotal = row[socialShareTotal]
                 dbcamp.percentComplete = row[percentComplete]
+                dbcamp.locationCity = row[locationCity]
+                dbcamp.locationCountry = row[locationCountry]
+                dbcamp.locationState = row[locationState]
                 if dbcamp.percentComplete == 'Infinity':
                     print('percent complete = infinity error')
                     dbcamp.percentComplete = 0.0
@@ -70,9 +73,6 @@ def createCampaigns():
                     print('money Per Donor = infinity error')
                     dbcamp.moneyPerDonor = 0.0
                 dbcamp.quality = row[quality]
-                dbcamp.locationCity = row[locationCity]
-                dbcamp.locationCountry = row[locationCountry]
-                dbcamp.locationState = row[locationState]
 
                 try:
                     dbcamp.save()

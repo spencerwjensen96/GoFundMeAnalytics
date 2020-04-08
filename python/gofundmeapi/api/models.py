@@ -4,8 +4,8 @@ from django.db import models
 class Campaign(models.Model):
     id = models.AutoField(primary_key=True) # this field is automatic, but I put it in here to show where our primary key comes from
     title = models.TextField()
-    description = models.TextField(blank=True)
-    userFirst = models.TextField(blank=True)
+    description = models.TextField()
+    userFirst = models.TextField()
     userLast = models.TextField(blank=True)
     donators = models.TextField()
     goal = models.TextField()
@@ -20,11 +20,11 @@ class Campaign(models.Model):
     percentComplete = models.TextField()
     percentCompleteForGivenDays = models.TextField()
     moneyPerDonor = models.TextField()
-    locationCity = models.TextField(blank=True)
-    locationCountry = models.TextField(blank=True)
-    quality = models.TextField(blank=True)
+    locationCity = models.TextField()
+    locationCountry = models.TextField()
+    quality = models.TextField()
     category = models.TextField(blank=True)
-    locationState = models.TextField(blank=True)
+    locationState = models.TextField()
 
 class Predict(models.Model):
     id = models.AutoField(primary_key=True) # this field is automatic, but I put it in here to show where our primary key comes from

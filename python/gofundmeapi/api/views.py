@@ -19,6 +19,8 @@ class Campaigns(APIView):
     def get(self, request, format=None):
         campaigns = Campaign.objects.all()
         if len(campaigns) > 0:
+            if len(campaigns) > 100:
+                campaigns = Campaign.objects.filter()[:100]
             serializer = CampaignSerializer(campaigns, many=True)
             return Response(serializer.data)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
