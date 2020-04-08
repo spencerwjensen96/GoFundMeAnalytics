@@ -33,30 +33,29 @@ export default function Search(props) {
     <>
     <Accordion defaultActiveKey="0" className="mx-3 px-3">
       <Card>
-      <bs.Form inline style={{'display': 'inline'}} onSubmit={(e) => handleClick(e)}>
+      <bs.Form style={{'display': 'inline'}} onSubmit={(e) => handleClick(e)}>
           <Accordion.Toggle style={{'display': 'block'}} as={Card.Header} variant="link" eventKey="0">
               <h3 className='mt-3' style={{'display': 'inline'}}>Search Filters</h3>
               <bs.Button className='m-1' style={{float: 'right', 'display': 'inline'}} variant="outline-success" type="submit">Search</bs.Button>
-              <bs.FormControl name="search" style={{float: 'right', width: '30%', 'display': 'inline'}} type="text" placeholder="Search" className="m-1" />
-            
+              <bs.FormControl name="search" style={{float: 'right', width: '30%', 'display': 'inline'}} type="text" placeholder="Search by..." className="m-1" />
           </Accordion.Toggle>
         <Accordion.Collapse eventKey="0">
-          <Card.Body>
-          <div>
-            <input className="mx-1" type="radio" value="city" name="radiogroup"/>
-            <label className="pr-3">City</label>
+          <Card.Body style={{'display': 'inline', float: 'left', width: '100%'}}>
+          <div className="flex-box">
+          <label className="pr-3 radio-inline"><input className="mx-1" type="radio" value="city" name="radiogroup"/>
+            City</label>
 
-            <input className="mx-1" type="radio" value="state" name="radiogroup"/>
-            <label className="pr-3"> State </label>
+            <label className="pr-3"><input className="mx-1" type="radio" value="state" name="radiogroup"/>
+            State </label>
 
-            <input className="mx-1" type="radio" value="country" name="radiogroup"/>
-            <label className="pr-3"> Country </label>
+            <label className="pr-3"><input className="mx-1" type="radio" value="country" name="radiogroup"/>
+             Country </label>
             
-            <input className="mx-1" type="radio" value="quality" name="radiogroup"/>
-            <label className="pr-3"> Campaign Quality </label>   
+             <label className="pr-3"><input className="mx-1" type="radio" value="quality" name="radiogroup"/>
+             Campaign Quality </label>   
             
-            <input className="mx-1" type="radio" value="title" name="radiogroup"/>
-            <label className="pr-3"> Campaign Title </label>
+             <label className="pr-3"><input className="mx-1" type="radio" value="title" name="radiogroup"/>
+             Campaign Title </label>
           </div>
           </Card.Body>
         </Accordion.Collapse>
