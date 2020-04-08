@@ -11,7 +11,7 @@ from decimal import Decimal
 
 #create Campaign Objects, and add it to the database
 def createCampaigns():
-    with open('Cleaned_Campaigns.csv', encoding='utf-8') as campCSV:
+    with open('Cleaned_Campaign.csv', encoding='utf-8') as campCSV:
         data = csv.reader(campCSV, delimiter=',')
         
         # integer variables to access them in the rows (what array index are they stored at?)
@@ -36,19 +36,12 @@ def createCampaigns():
         numFails = 0
 
         for row in data:
-            # print("row: ")
-            # try:
-            #     print(row)
-            # except:
-            #     print("can't read unicode char probably is the error")
             if(row[1] != 'Unnamed: 0'): # this skips the first row, we don't want to save the headers to our database
                 dbcamp = Campaign()
                 dbcamp.currentAmount = Decimal(row[currentAmount])
-                # print('current amount', dbcamp.currentAmount)
-                dbcamp.daysActive = int(Decimal(row[daysActive]))
-                # print('days active', dbcamp.daysActive)
-                dbcamp.goal = int(row[goal])
-                dbcamp.donators = int(row[donators])
+                dbcamp.daysActive = Decimal(row[daysActive])
+                dbcamp.goal = row[goal]
+                dbcamp.donators = row[donators]
                 dbcamp.title = row[title]
                 dbcamp.description = row[description]
                 dbcamp.userFirst = row[userFirst]
@@ -56,37 +49,31 @@ def createCampaigns():
                 dbcamp.status = row[status] # if = 1 then true, if = 0 then false // I hope :)
                 dbcamp.imageUrl = row[imageUrl]
                 dbcamp.launchDate = row[launchDate]
-                dbcamp.campaignHearts = int(row[campaignHearts])
-                dbcamp.socialShareTotal = int(row[socialShareTotal])
-                dbcamp.percentComplete = Decimal(row[percentComplete])
+                dbcamp.campaignHearts = row[campaignHearts]
+                dbcamp.socialShareTotal = row[socialShareTotal]
+                dbcamp.percentComplete = row[percentComplete]
                 if dbcamp.percentComplete == 'Infinity':
                     print('percent complete = infinity error')
                     dbcamp.percentComplete = 0.0
-                # print('percent complete', dbcamp.percentComplete)
-                dbcamp.percentCompleteForGivenDays = Decimal(row[percentCompleteForGivenDays])
+                dbcamp.percentCompleteForGivenDays = row[percentCompleteForGivenDays]
                 if dbcamp.percentCompleteForGivenDays == 'Infinity':
                     print('percent complete for given days = infinity error')
                     dbcamp.percentCompleteForGivenDays = 0.0
-                # print('for given days', dbcamp.percentCompleteForGivenDays)
-                dbcamp.moneyPerDonor = Decimal(row[moneyPerDonor])
+                dbcamp.moneyPerDonor = row[moneyPerDonor]
                 if dbcamp.moneyPerDonor == 'Infinity':
-                    print('money Per Donor= infinity error')
+                    print('money Per Donor = infinity error')
                     dbcamp.moneyPerDonor = 0.0
-                # print('money per donor', dbcamp.moneyPerDonor)
-
-                # try:
-                #     print(dbcamp.title)
-                # except:
-                #     print("title for ", dbcamp.description, " contains unknown chars")
-                # try:
-                #     print(dbcamp.description)
-                # except:
-                #     print("description for ", dbcamp.title, " contains unknown chars")
 
                 try:
                     dbcamp.save()
-                except:
-                    print("error saving", dbcamp.title, "to the database")
+                except ValueError as err:
+                    print("VALUE error saving", dbcamp.title, "--- to database")
+                    numFails += 1
+                except TypeError as err:
+                    print("TYPE error saving", dbcamp.title, "--- to database")
+                    numFails += 1
+                except IOError as err:
+                    print("I/O error saving", dbcamp.title, "--- to database")
                     numFails += 1
 
                 # print(dbcamp)
