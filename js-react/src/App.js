@@ -9,7 +9,7 @@ import Home from './components/Home.js';
 import Footer from './components/Footer.js';
 import RightSide from './components/RightSide';
 import Search from './components/Search';
-import LineGraph from './components/LineGraph';
+import CampaignDashboard from './components/CampaignDashboard';
 import Prediction from './components/Prediction';
 
 function App() {
@@ -36,8 +36,8 @@ function App() {
                 <Route path="/search">
                   <Search />
                 </Route>
-                <Route path="/campaign-dashboard">
-                  <LineGraph />
+                <Route path="/CampaignDash">
+                  <CampaignDashboard />
                 </Route>
                 <Route path="/prediction">
                   <Prediction />
