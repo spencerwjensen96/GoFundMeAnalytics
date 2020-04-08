@@ -16,12 +16,33 @@ const desc = {'font-family': 'Roboto', 'font-size': '17px'}
 
 
 export default function Search(props) {
-//let match = useRouteMatch('/qualityanalysis/:searchparams/');
 const context = useContext(AppContext)
-// if(context.campaigns) {
+const history = useHistory();
 
-  const history = useHistory();
+let campaigns = context.campaigns
+const url = window.location.search
+// console.log("campaigns: ", campaigns)
+if(url) {
+  let filter = url.substr(url.indexOf('?') + 1, url.indexOf('=') -1)
+  let search = url.substr(url.indexOf('=') + 1)
+  if(filter && search) {
+    if(filter === 'state') {
+      filter = 'locationState';
+    }
+    if(filter === 'city') {
+      filter = 'locationCity';
+    }
+    if(filter === 'country') {
+      filter = 'locationCountry';
+    }
+    console.log("URL: ", url, "\tSearch:", search, "\tFilter:", filter)
+    //filtering done here
+    campaigns = Object.values(campaigns).filter(campaign => campaign[filter].includes(search))
+    console.log("filtered campaigns", campaigns)
+  }
+}
 
+if(campaigns) {
   function handleClick(e) {
     e.preventDefault();
     e.target.search.name = e.target.radiogroup.value
@@ -64,7 +85,7 @@ const context = useContext(AppContext)
     </Accordion> <br></br>
       <CardDeck className="row-cols-3">
           {/* {Object.values(context.campaigns).map((camp) => { */}
-          {Object.values(context.campaigns).map((camp) => {
+          {Object.values(campaigns).map((camp) => {
                 return (
                   <bs.Col md="4" key={camp.id}>
                     <Card className="mb-3">
@@ -92,46 +113,11 @@ const context = useContext(AppContext)
         </CardDeck>
     </>
     );
-  // }
-// else {
-//   return (
-//     <p>Campaigns failed to load from the API. Try refreshing the page, to reconnect to the campaigns database.</p>
-//   );
-// }
+  }
+else {
+  return (
+    <p>Campaigns failed to load from the API. Try refreshing the page, to reconnect to the campaigns database.</p>
+  );
+}
 
 }
-// const Campaigns = {
-//   "0": {
-//       id: "867850",
-//       name: "Jessica's COVID-19 fund",
-//       description:"Anim excepteur incididunt adipisicing id cillum. Velit consequat ut dolor voluptate eiusmod esse sint tempor esse. Irure sint ea exercitation reprehenderit. Labore aliqua incididunt duis magna incididunt mollit exercitation amet cupidatat. Nostrud amet sit pariatur elit commodo. Laborum laboris aliqua non excepteur anim laborum mollit velit. Ullamco sint adipisicing nostrud reprehenderit sint.",
-//       currentAmount: 45,
-//       location: "Detroit, MI",
-//       goal: 500,
-//   },
-//   "1": {
-//       id: "477227",
-//       name: "Rubber Duck COVID-19 fund",
-//       description: "Sunt nisi irure in et ut ex labore ea non sit dolor. Laboris pariatur ea duis sint esse anim mollit anim cupidatat aliquip officia veniam minim. Amet aliquip voluptate voluptate tempor tempor eiusmod officia. Ut magna dolor mollit consequat minim. Est qui commodo fugiat ex minim do. Laborum laborum anim adipisicing voluptate cillum sunt cupidatat adipisicing reprehenderit. Non pariatur in sint do esse do ullamco sit.",
-//       currentAmount: 147,
-//       location: "Dearborne, MI",
-//       goal: 5000,
-//   },
-//   "2": {
-//       id: "946406",
-//       name: "Apple COVID-19 fund",
-//       description: "Aliquip elit amet ad deserunt. Ea elit occaecat aliquip id ipsum. Anim eu nulla nostrud culpa commodo pariatur commodo fugiat adipisicing voluptate occaecat laboris. Amet deserunt in fugiat esse eu duis. Do magna occaecat nisi commodo commodo.",
-//       currentAmount: 211,
-//       location: "Grand Rapids, MI",
-//       goal: 500,
-//   },
-//   "3": {
-//       id: "936979",
-//       name: "Bag COVID-19 fund",
-//       description: "Aliquip veniam veniam irure ipsum. In eiusmod ex reprehenderit irure incididunt esse ad voluptate amet ea culpa nisi ipsum. Commodo commodo et aliqua duis eu anim. Anim anim eu commodo ea nulla laborum.",
-//       currentAmount: 369,
-//       location: "Sault Saint Marie, MI",
-//       goal: 2000,
-//   },
-// }
-// filename={`${process.env.PUBLIC_URL}/media/products/${pro.filename}-1.png`}

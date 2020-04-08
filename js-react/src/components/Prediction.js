@@ -3,7 +3,9 @@ import { useHistory } from 'react-router-dom'
 
 function Prediction(props) {
     const history = useHistory();
-    const percent = history.location.calculatedPercent;
+    let percent = history.location.calculatedPercent;
+    // const e = 
+    // percent = Math.pow(percent, e)
     if(percent !== 0) {
     return (
         <div>
