@@ -4,10 +4,14 @@ import * as bs from 'react-bootstrap'
 
 export default function Header(props) {
 
+function handleClick(e) {
+  alert("serach for something");
+}
+
 return(
     <bs.Navbar expand="lg" style={{backgroundColor: 'white'}}>
       <bs.Col md={1}></bs.Col>
-        <bs.Col md={6}>
+        <bs.Col md={5}>
           <bs.Navbar.Brand href="/" style={{color: '#5cb85c'}}>Go Fund Me Analytics</bs.Navbar.Brand>
         </bs.Col>
         
@@ -27,8 +31,15 @@ return(
         <bs.Col md={3}>
           <bs.Form inline>
             <bs.FormControl style={{float: 'right', width: '70%'}} type="text" placeholder="Search" className="m-1" />
-            <bs.Button variant="outline-success">Search</bs.Button>
+            <bs.Button variant="outline-success" onClick={() => handleClick()}>Search</bs.Button>
           </bs.Form>
+        </bs.Col>
+        <bs.Col md={1}>
+          <bs.Nav className="justify-content-end" activeKey="/home">
+            <bs.Nav.Item>
+              <bs.Nav.Link href="/login">Log In</bs.Nav.Link>
+            </bs.Nav.Item>
+          </bs.Nav>
         </bs.Col>
     </bs.Navbar>
   );
