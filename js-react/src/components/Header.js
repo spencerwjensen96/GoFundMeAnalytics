@@ -20,7 +20,7 @@ return(
               <bs.Nav.Link eventKey="predict" href="/">Predict</bs.Nav.Link>
             </bs.Nav.Item>
             <bs.Nav.Item>
-              <bs.Nav.Link eventKey="dashboard" href="/CampaignDashboard">MyAnalytics</bs.Nav.Link>
+              <bs.Nav.Link eventKey="dashboard" href="/campaign-dashboard">MyAnalytics</bs.Nav.Link>
             </bs.Nav.Item>
           </bs.Nav>
         </bs.Col>
