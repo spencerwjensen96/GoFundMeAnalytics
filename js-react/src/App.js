@@ -13,6 +13,7 @@ import CampaignDashboard from './components/CampaignDashboard';
 import Prediction from './components/Prediction';
 import NotFound from './components/NotFound'
 import LogIn from './components/LogIn';
+import CampaignDetails from './components/CampaignDetails';
 
 function App() {
   return (
@@ -43,6 +44,9 @@ function App() {
                 </Route>
                 <Route path="/prediction">
                   <Prediction />
+                </Route>
+                <Route path="/details/:id">
+                  <CampaignDetails />
                 </Route>
                 <Route path="/not-found">
                   <NotFound/>
