@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 import {Container, Col, Row } from 'react-bootstrap'
 import {
-  LineChart, Line, XAxis, YAxis, Tooltip, Legend, PieChart, Pie, Cell, Bar, BarChart
+  LineChart, Line, XAxis, YAxis, Tooltip, Legend, PieChart, Pie, Cell, Bar, BarChart, Area, AreaChart
 } from 'recharts';
 
 const data = [
@@ -65,7 +65,7 @@ export default class Example extends PureComponent {
         <Container fluid="md">
             <Row className="p-2">
                 <Col style={card} className="p-2 mx-2 mb-3">
-                    <img src="https://pngimg.com/uploads/dollar_sign/dollar_sign_PNG21539.png" className="float-right" style={{'width':'40px', 'height':'40px'}}></img>
+                    <img src="/media/dollar.jpg" className="float-right" style={{'width':'60px', 'height':'45px'}}></img>
                     <p style={{'line-height':'80%'}}>DONATIONS</p>
                     <strong><h3 style={{'line-height':'80%'}}>$2,500</h3></strong>
                     <i style={{'color': 'green'}} class="fas fa-arrow-up"></i>
@@ -73,7 +73,7 @@ export default class Example extends PureComponent {
                     <p style={{'display': 'inline'}}> since last week</p>
                 </Col>
                 <Col style={card} className="p-2 mx-2 mb-3">
-                <img src="https://img.icons8.com/cotton/2x/like.png" className="float-right" style={{'width':'40px', 'height':'40px'}}></img>
+                <img src="/media/heart.png" className="float-right" style={{'width':'55px', 'height':'55px'}}></img>
                     <p style={{'line-height':'80%'}}>HEARTS</p>
                     <strong><h3 style={{'line-height':'80%'}}>50</h3></strong>
                     <i style={{'color': 'red'}} class="fas fa-arrow-down"></i>
@@ -81,7 +81,7 @@ export default class Example extends PureComponent {
                     <p style={{'display': 'inline'}}> since last week</p>
                 </Col>
                 <Col style={card} className="p-2 mx-2 mb-3">
-                <img src="https://img.icons8.com/pastel-glyph/2x/person-male.png" className="float-right" style={{'width':'40px', 'height':'40px'}}></img>
+                <img src="/media/donor.png" className="float-right" style={{'width':'55px', 'height':'55px'}}></img>
                     <p style={{'line-height':'80%'}}>DONORS</p>
                     <strong><h3 style={{'line-height':'80%'}}>5</h3></strong>
                     <i style={{'color': 'green'}} class="fas fa-arrow-up"></i>
@@ -89,7 +89,7 @@ export default class Example extends PureComponent {
                     <p style={{'display': 'inline'}}> since last week</p>
                 </Col>
                 <Col style={card} className="p-2 mx-2 mb-3">
-                <img src="https://www.workplaceweek.com/wp-content/uploads/2018/03/Workplace-Week-Speech-Icon.png" className="float-right" style={{'width':'40px', 'height':'40px'}}></img>
+                <img src="/media/comment.png" className="float-right" style={{'width':'50px', 'height':'50px'}}></img>
                     <p style={{'line-height':'80%'}}>COMMENTS</p>
                     <strong><h3 style={{'line-height':'80%'}}>11</h3></strong>
                     <i style={{'color': 'green'}} class="fas fa-arrow-up"></i>
@@ -138,10 +138,26 @@ export default class Example extends PureComponent {
             </Row>
             <Row className="p-2">
                 <Col style={card} className="p-2 mx-2">
-                    <h3>Analytic 1</h3>
+                    <h5 className="text-center">CUSTOM ANALYTIC 1</h5>
+                    <br></br><br></br><br></br><br></br>
+                    <AreaChart
+                      width={250}
+                      height={100}
+                      data={data}
+                      margin={{
+                        top: 10, right: 30, left: 0, bottom: 0,
+                      }}
+                    >
+                      <XAxis dataKey="name" />
+                      <YAxis />
+                      <Tooltip />
+                      <Area type="monotone" dataKey="uv" stackId="1" stroke="#8884d8" fill="#8884d8" />
+                      <Area type="monotone" dataKey="pv" stackId="1" stroke="#82ca9d" fill="#82ca9d" />
+                      <Area type="monotone" dataKey="amt" stackId="1" stroke="#ffc658" fill="#ffc658" />
+                    </AreaChart>
                 </Col>
                 <Col xs={8} style={card} className="p-2 mx-2">
-                  <h3>Analytic 2</h3>
+                  <h5 className="text-center">CUSTOM ANALYTIC 2</h5>
                   <BarChart
                     width={500}
                     height={300}
