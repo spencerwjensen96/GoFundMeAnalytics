@@ -9,8 +9,8 @@ import Home from './components/Home.js';
 import Footer from './components/Footer.js';
 import RightSide from './components/RightSide';
 import Search from './components/Search';
+import LineGraph from './components/LineGraph';
 import Prediction from './components/Prediction';
-
 
 function App() {
   return (
@@ -36,6 +36,8 @@ function App() {
                 <Route path="/search">
                   <Search />
                 </Route>
+                <Route path="/CampaignDash">
+                  <LineGraph />
                 <Route path="/prediction">
                   <Prediction />
                 </Route>
