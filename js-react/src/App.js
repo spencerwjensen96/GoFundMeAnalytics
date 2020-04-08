@@ -68,7 +68,7 @@ function App() {
           <div><p></p></div>
         </bs.Row>
         <bs.Row>
-          <bs.Col md={12} style={{ backgroundColor: "lightgray"}}>
+          <bs.Col md={12}>
             <Footer />
           </bs.Col>
         </bs.Row>

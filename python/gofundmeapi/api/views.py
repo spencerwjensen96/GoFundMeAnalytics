@@ -18,7 +18,6 @@ class Campaigns(APIView):
     @csrf_exempt
     def get(self, request, format=None):
         campaigns = Campaign.objects.all()
-        print(request.body)
         if len(campaigns) > 0:
             # if len(campaigns) > 100:
             #     campaigns = Campaign.objects.filter()[:100]

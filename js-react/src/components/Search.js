@@ -1,5 +1,5 @@
 import React from 'react';
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 import * as bs from 'react-bootstrap';
 import {CardDeck, Card, ProgressBar, Accordion, Button } from 'react-bootstrap'
 import {useHistory} from "react-router-dom";
@@ -9,36 +9,53 @@ import {
 } from "react-router-dom";
 
 const progressBar = {height: '4px'}
-const greenText = {color: '#32b80d', 'font-family': 'Roboto Condensed'}
-const title = {'font-family': 'Roboto', 'font-size': '17px', color: '#141414'}
-const desc = {'font-family': 'Roboto', 'font-size': '17px'}
+const greenText = {color: '#32b80d', 'fontFamily': 'Roboto Condensed'}
+const title = {'fontFamily': 'Roboto', 'fontSize': '17px', color: '#141414'}
+const desc = {'fontFamily': 'Roboto', 'fontSize': '17px'}
 
 
 
 export default function Search(props) {
 const context = useContext(AppContext)
 const history = useHistory();
+let [limit, setLimit] = useState(30)
+let [displayVar, setDisplayVar] = useState('block')
 
-let campaigns = context.campaigns
+let campaigns = Object.values(context.campaigns)
+
+for(let camp of campaigns) {
+  if(camp.quality < 0.31) {
+    camp.qualityText = 'Poor'
+  }
+  else if (camp.quality <= 0.35) {
+    camp.qualityText = 'Fair'
+  }
+  else if (camp.quality <= 0.51) {
+    camp.qualityText = 'Good'
+  }
+  else if (camp.quality <= 0.67) {
+    camp.qualityText = 'Great'
+  }
+  else {
+    camp.qualityText = 'Excellent'
+  }
+}
+
 const url = window.location.search
-// console.log("campaigns: ", campaigns)
 if(url) {
   let filter = url.substr(url.indexOf('?') + 1, url.indexOf('=') -1)
   let search = url.substr(url.indexOf('=') + 1)
   if(filter && search) {
-    if(filter === 'state') {
-      filter = 'locationState';
-    }
-    if(filter === 'city') {
-      filter = 'locationCity';
-    }
-    if(filter === 'country') {
-      filter = 'locationCountry';
-    }
-    console.log("URL: ", url, "\tSearch:", search, "\tFilter:", filter)
     //filtering done here
-    campaigns = Object.values(campaigns).filter(campaign => campaign[filter].includes(search))
-    console.log("filtered campaigns", campaigns)
+    if(search.includes('%20')) {
+      search = search.replace(/%20/gi, ' ')
+    }
+    // console.log("filter: ", filter, "search: ", search)
+    campaigns = campaigns.filter(campaign => campaign[filter].includes(search))
+    //sort the campaigns if filtering on quality
+    if(filter === 'qualityText') {
+      campaigns = campaigns.sort((camp, camp2) => camp['quality'] > camp2['quality'])
+    }
   }
 }
 
@@ -48,8 +65,15 @@ if(campaigns) {
     e.target.search.name = e.target.radiogroup.value
     history.push("/search/")
     history.push(`?${e.target.radiogroup.value}=${e.target.search.value}`)
+
+    setLimit(30)
+    if(campaigns.length < limit) {
+      setDisplayVar('none');
+    }
+    else {
+     setDisplayVar('block')
+    }
   }
-  //console.log(context.campaigns)
   return(
     <>
     <Accordion defaultActiveKey="0" className="mx-3 px-3">
@@ -63,20 +87,23 @@ if(campaigns) {
         <Accordion.Collapse eventKey="0">
           <Card.Body style={{'display': 'inline', float: 'left', width: '100%'}}>
           <div className="flex-box">
-          <label className="pr-3 radio-inline"><input className="mx-1" type="radio" value="city" name="radiogroup"/>
+          <label className="pr-3 radio-inline"><input className="mx-1" type="radio" value="locationCity" name="radiogroup"/>
             City</label>
 
-            <label className="pr-3"><input className="mx-1" type="radio" value="state" name="radiogroup"/>
+            <label className="pr-3"><input className="mx-1" type="radio" value="locationState" name="radiogroup"/>
             State </label>
 
-            <label className="pr-3"><input className="mx-1" type="radio" value="country" name="radiogroup"/>
+            <label className="pr-3"><input className="mx-1" type="radio" value="locationCountry" name="radiogroup"/>
              Country </label>
-            
-             <label className="pr-3"><input className="mx-1" type="radio" value="quality" name="radiogroup"/>
-             Campaign Quality </label>   
             
              <label className="pr-3"><input className="mx-1" type="radio" value="title" name="radiogroup"/>
              Campaign Title </label>
+
+             <label className="pr-3"><input className="mx-1" type="radio" value="description" name="radiogroup"/>
+             Campaign Description </label>
+            
+             <label className="pr-3"><input className="mx-1" type="radio" value="qualityText" name="radiogroup"/>
+             Campaign Quality </label>
           </div>
           </Card.Body>
         </Accordion.Collapse>
@@ -84,8 +111,7 @@ if(campaigns) {
       </Card>
     </Accordion> <br></br>
       <CardDeck className="row-cols-3">
-          {/* {Object.values(context.campaigns).map((camp) => { */}
-          {Object.values(campaigns).map((camp) => {
+          {campaigns.slice(0,limit).map((camp) => {
                 return (
                   <bs.Col md="4" key={camp.id}>
                     <Card className="mb-3">
@@ -99,9 +125,9 @@ if(campaigns) {
                         </Link>
                       </div>
                       <Card.Footer>
-                          <h6 class="card-subtitle mb-2 text-muted"><strong style={greenText}>{camp.locationCity.toUpperCase()}</strong></h6>
-                          <Link to={`/details/${camp.id}`}><h5 class="card-subtitle mb-2"><strong style={title}>{camp.title}</strong></h5></Link>
-                          <p class="card-text" style={desc}> {camp.description.substring(0, 50)}...</p>
+                          <h6 className="card-subtitle mb-2 text-muted"><strong style={greenText}>{camp.locationCity.toUpperCase()}</strong></h6>
+                          <Link to={`/details/${camp.id}`}><h5 className="card-subtitle mb-2"><strong style={title}>{camp.title}</strong></h5></Link>
+                          <p className="card-text" style={desc}> {camp.description.substring(0, 50)}...</p>
                             <ProgressBar style={progressBar} variant='success' now={camp.percentComplete}/>
                             {/* {console.log(progress)} */}
                           <p><strong>${camp.currentAmount} raised</strong> of ${camp.goal} </p>
@@ -111,6 +137,14 @@ if(campaigns) {
                 );
           })}
         </CardDeck>
+        <Button onClick={() => {
+          setLimit(limit = limit + 15)
+          if(campaigns.length < limit) {
+             setDisplayVar('none');
+          }
+        }} variant='success'
+        style={{ display: `${displayVar}`, margin: 'auto' }}
+        >Load More</Button>
     </>
     );
   }
