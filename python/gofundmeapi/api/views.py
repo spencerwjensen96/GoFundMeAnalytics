@@ -9,7 +9,7 @@ from rest_framework.response import Response
 from rest_framework import status
 import json
 import time
-#my imports
+# my imports
 from api.serializers import CampaignSerializer, PredictSerializer
 from api.models import Campaign
 

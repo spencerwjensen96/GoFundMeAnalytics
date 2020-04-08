@@ -24,6 +24,7 @@ class Campaign(models.Model):
     locationCountry = models.TextField(blank=True)
     quality = models.TextField(blank=True)
     category = models.TextField(blank=True)
+    locationState = models.TextField(blank=True)
 
 class Predict(models.Model):
     id = models.AutoField(primary_key=True) # this field is automatic, but I put it in here to show where our primary key comes from

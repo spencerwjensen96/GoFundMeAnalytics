@@ -11,7 +11,7 @@ from decimal import Decimal
 
 #create Campaign Objects, and add it to the database
 def createCampaigns():
-    with open('Clean_Camp3_URL.csv', encoding='utf-8') as campCSV:
+    with open('Clean_Camp7_URL.csv', encoding='utf-8') as campCSV:
         data = csv.reader(campCSV, delimiter=',')
         
         # integer variables to access them in the rows (what array index are they stored at?)
@@ -35,6 +35,7 @@ def createCampaigns():
         percentCompleteForGivenDays = 37
         moneyPerDonor = 38
         quality = 51
+        locationState = 52
 
         # number of rows that were unable to save to the database
         numFails = 0
@@ -71,6 +72,7 @@ def createCampaigns():
                 dbcamp.quality = row[quality]
                 dbcamp.locationCity = row[locationCity]
                 dbcamp.locationCountry = row[locationCountry]
+                dbcamp.locationState = row[locationState]
 
                 try:
                     dbcamp.save()
