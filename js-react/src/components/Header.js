@@ -11,20 +11,20 @@ function handleClick(e) {
 return(
     <bs.Navbar expand="lg" style={{backgroundColor: 'white'}}>
       <bs.Col md={1}></bs.Col>
-        <bs.Col md={5}>
+        <bs.Col md={2}>
           <bs.Navbar.Brand href="/" style={{color: '#5cb85c'}}>Go Fund Me Analytics</bs.Navbar.Brand>
         </bs.Col>
         
-        <bs.Col md={2}>
+        <bs.Col md={5}>
           <bs.Nav className="justify-content-end" activeKey="/home">
             <bs.Nav.Item>
-              <bs.Nav.Link href="/search">Search</bs.Nav.Link>
+              <bs.Nav.Link eventkey="search" href="/search">Find a Campaign</bs.Nav.Link>
             </bs.Nav.Item>
             <bs.Nav.Item>
-              <bs.Nav.Link eventKey="predict" href="/">Predict</bs.Nav.Link>
+              <bs.Nav.Link eventKey="predict" href="/">Predict Success</bs.Nav.Link>
             </bs.Nav.Item>
             <bs.Nav.Item>
-              <bs.Nav.Link eventKey="dashboard" href="/campaign-dashboard">MyAnalytics</bs.Nav.Link>
+              <bs.Nav.Link eventKey="dashboard" href="/campaign-dashboard">My Analytics</bs.Nav.Link>
             </bs.Nav.Item>
           </bs.Nav>
         </bs.Col>
@@ -37,7 +37,7 @@ return(
         <bs.Col md={1}>
           <bs.Nav className="justify-content-end" activeKey="/home">
             <bs.Nav.Item>
-              <bs.Nav.Link href="https://www.gofundme.com/sign-in" target="_blank">Log In</bs.Nav.Link>
+              <bs.Nav.Link eventkey="login" href="/log-in">Log In</bs.Nav.Link>
             </bs.Nav.Item>
           </bs.Nav>
         </bs.Col>

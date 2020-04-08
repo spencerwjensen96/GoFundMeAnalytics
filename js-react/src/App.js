@@ -12,6 +12,7 @@ import Search from './components/Search';
 import CampaignDashboard from './components/CampaignDashboard';
 import Prediction from './components/Prediction';
 import NotFound from './components/NotFound'
+import LogIn from './components/LogIn';
 
 function App() {
   return (
@@ -29,7 +30,7 @@ function App() {
           <bs.Col md={2} style={{ backgroundColor: "#ECECEC"}} className="px-3 py-4" > 
             <LeftSide />
           </bs.Col>
-          <bs.Col md={8} style={{ position: "relative", backgroundColor: "white", borderRadius: '3px', boxShadow: "-3px 5px 5px #9E9E9E"}} className="px-3 py-4" >
+          <bs.Col md={8} style={{ position: "relative", backgroundColor: "white", borderRadius: '3px', boxShadow: "-3px 5px 20px #9E9E9E"}} className="px-3 py-4" >
               <Switch>
                 <Route path="/home">
                   <Home />
@@ -43,12 +44,16 @@ function App() {
                 <Route path="/prediction">
                   <Prediction />
                 </Route>
-                <Route path="/">
-                  <Home/>
-                </Route>
                 <Route path="/not-found">
                   <NotFound/>
                 </Route>
+                <Route path="/log-in">
+                  <LogIn/>
+                </Route>
+                <Route path="/">
+                  <Home/>
+                </Route>
+                
               </Switch>
           </bs.Col>
           <bs.Col md={2} style={{ backgroundColor: "#ECECEC"}} className="px-3 py-4" > 
