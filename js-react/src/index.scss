@@ -2,3 +2,19 @@
 @import "~bootstrap/scss/variables";
 @import "~bootstrap/scss/mixins";
 @import '~bootstrap/scss/bootstrap.scss'; //the rest of bootstrap scss
+
+.notshowing {
+    visibility: hidden;
+    display: none;
+}
+  
+.showing {
+    visibility: visible;
+}
+  
+.showing:hover {
+    .notshowing {
+    visibility: visible;
+    display: block;
+    }   
+}
