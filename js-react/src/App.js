@@ -36,7 +36,7 @@ function App() {
                 <Route path="/search">
                   <Search />
                 </Route>
-                <Route path="/CampaignDash">
+                <Route path="/campaign-dashboard">
                   <CampaignDashboard />
                 </Route>
                 <Route path="/prediction">
