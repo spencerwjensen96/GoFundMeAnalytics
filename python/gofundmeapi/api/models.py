@@ -11,9 +11,8 @@ class Campaign(models.Model):
     goal = models.TextField()
     currentAmount = models.TextField()
     daysActive = models.TextField()
-    # daysCreated = models.TextField()
     status = models.TextField(blank=True)
-    # hasBeneficiary = models.BooleanField(blank=True)
+    hasBeneficiary = models.TextField(blank=True, default='FALSE')
     imageUrl = models.TextField(blank=True)
     launchDate = models.TextField(blank=True)
     campaignHearts = models.TextField(blank=True)
@@ -21,7 +20,11 @@ class Campaign(models.Model):
     percentComplete = models.TextField()
     percentCompleteForGivenDays = models.TextField()
     moneyPerDonor = models.TextField()
-    quality = models.TextField()
+    locationCity = models.TextField(blank=True)
+    locationCountry = models.TextField(blank=True)
+    quality = models.TextField(blank=True)
+    category = models.TextField(blank=True)
+    locationState = models.TextField(blank=True)
 
 class Predict(models.Model):
     id = models.AutoField(primary_key=True) # this field is automatic, but I put it in here to show where our primary key comes from
@@ -32,3 +35,4 @@ class Predict(models.Model):
     hasBeneficiary = models.BooleanField()
     isCharity = models.BooleanField()
     visibleInSearch = models.BooleanField()
+    prediction = models.TextField(blank=True)

@@ -1,7 +1,6 @@
 # 3rd party imports
 from django.shortcuts import render
 import urllib
-import numpy as np
 # If you are using Python 3+, import urllib instead of urllib2
 from django.http import Http404
 from django.views.decorators.csrf import csrf_exempt
@@ -10,7 +9,7 @@ from rest_framework.response import Response
 from rest_framework import status
 import json
 import time
-#my imports
+# my imports
 from api.serializers import CampaignSerializer, PredictSerializer
 from api.models import Campaign
 
