@@ -1,7 +1,6 @@
 # 3rd party imports
 from django.shortcuts import render
 import urllib
-import numpy as np
 # If you are using Python 3+, import urllib instead of urllib2
 from django.http import Http404
 from django.views.decorators.csrf import csrf_exempt
