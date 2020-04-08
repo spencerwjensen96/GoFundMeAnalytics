@@ -31,9 +31,13 @@ export default class AppProvider extends React.Component {
         // this is where we make our axios API calls
         const resp = await axios.get('http://localhost:8000/api/campaigns/')
 
+        const campaigns = {}
+        for (const c of resp.data) {
+            campaigns[c.id] = c
+        }
+
         this.setState({
-            ...this.state,
-            campaigns: resp.data,
+            campaigns: campaigns
         })
     }
 
