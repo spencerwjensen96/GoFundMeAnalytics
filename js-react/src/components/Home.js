@@ -64,11 +64,19 @@ export default function Home(props) {
                     'visibleInSearch': values.visibleInSearch,
                     'hasBeneficiary': values.hasBeneficiary,
                 })
-                console.log("Django response: ", apiResponse.data)
-                let predictedPercent = apiResponse.data['Results']['output1']['value']['values']['Scored Labels']
+                const azureResponse = JSON.parse(apiResponse.data)
+                const scoredLabelsIndex = azureResponse.Results.output1.value.ColumnNames.indexOf('Scored Labels')
+                if(scoredLabelsIndex === -1) {
+                    history.push({
+                        pathname: '/error',
+                        state: { error: 'Scored Labels not found in the API response from Azure' }
+                    })
+                    return;
+                }
+                const predictedPercent = azureResponse.Results.output1.value.Values[0][scoredLabelsIndex]
                 history.push({
                     pathname: '/prediction',
-                    state: { calculatedPercentage: predictedPercent}
+                    calculatedPercent: predictedPercent,
                 });
                 return;
             }}
