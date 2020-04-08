@@ -11,10 +11,11 @@ from decimal import Decimal
 
 #create Campaign Objects, and add it to the database
 def createCampaigns():
-    with open('Cleaned_Campaign.csv', encoding='utf-8') as campCSV:
+    with open('Clean_Camp3_URL.csv', encoding='utf-8') as campCSV:
         data = csv.reader(campCSV, delimiter=',')
         
         # integer variables to access them in the rows (what array index are they stored at?)
+        category = 7
         currentAmount = 9
         goal = 10
         donators = 11
@@ -28,9 +29,12 @@ def createCampaigns():
         launchDate = 28
         campaignHearts = 29
         socialShareTotal = 30
+        locationCity = 31
+        locationCountry = 32
         percentComplete = 36
         percentCompleteForGivenDays = 37
         moneyPerDonor = 38
+        quality = 51
 
         # number of rows that were unable to save to the database
         numFails = 0
@@ -38,6 +42,7 @@ def createCampaigns():
         for row in data:
             if(row[1] != 'Unnamed: 0'): # this skips the first row, we don't want to save the headers to our database
                 dbcamp = Campaign()
+                dbcamp.category = row[category]
                 dbcamp.currentAmount = Decimal(row[currentAmount])
                 dbcamp.daysActive = Decimal(row[daysActive])
                 dbcamp.goal = row[goal]
@@ -63,6 +68,9 @@ def createCampaigns():
                 if dbcamp.moneyPerDonor == 'Infinity':
                     print('money Per Donor = infinity error')
                     dbcamp.moneyPerDonor = 0.0
+                dbcamp.quality = row[quality]
+                dbcamp.locationCity = row[locationCity]
+                dbcamp.locationCountry = row[locationCountry]
 
                 try:
                     dbcamp.save()
