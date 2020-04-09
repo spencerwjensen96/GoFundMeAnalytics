@@ -3,6 +3,7 @@ import {Container, Col, Row } from 'react-bootstrap'
 import {
   LineChart, Line, XAxis, YAxis, Tooltip, Legend, PieChart, Pie, Cell, Bar, BarChart, Area, AreaChart
 } from 'recharts';
+import { Link } from "react-router-dom";
 
 const data = [
   {
@@ -51,20 +52,19 @@ const data02 = [
     },
   ];
 const data01 = [
-    { name: 'Anonymous Donors', value: 500 }, { name: 'Named Donors', value: 1000 },
+    { name: 'Anonymous Donors', value: 157 }, { name: 'Named Donors', value: 340 },
   ];
   const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042'];
 const card = {background: '#F5F2F2', 'border-radius': '7px'}
-const paddingFix = {height: '300px'}
-
 export default class Example extends PureComponent {
   static jsfiddleUrl = 'https://jsfiddle.net/alidingling/xqjtetw0/';
 
   render() {
     return (
         <Container fluid="md">
-          <div style={{textAlign: 'center'}}>
-            <h1>My Analytics Dashboard</h1>
+          <div style={{textAlign: 'center'}} className="pb-2">
+            <h1><b>My Campaign Analytics Dashboard</b></h1>
+            <p><Link style={{color: 'black'}} eventKey="dashboard" to="/campaign-dashboard">Campaign Dashboard</Link> | <Link style={{color: 'black'}} eventKey="dashboard" to="/donor-dashboard">Donor Dashboard</Link></p>
           </div>
             <Row className="p-2">
                 <Col style={card} className="p-2 mx-2 mb-3">
@@ -86,7 +86,7 @@ export default class Example extends PureComponent {
                 <Col style={card} className="p-2 mx-2 mb-3">
                 <img src="/media/donor.png" className="float-right" style={{'width':'55px', 'height':'55px'}}></img>
                     <p style={{'line-height':'80%'}}>DONORS</p>
-                    <strong><h3 style={{'line-height':'80%'}}>5</h3></strong>
+                    <strong><h3 style={{'line-height':'80%'}}>11</h3></strong>
                     <i style={{'color': 'green'}} class="fas fa-arrow-up"></i>
                     <p style={{'display': 'inline', 'color': 'green'}}><strong> 8%</strong></p>
                     <p style={{'display': 'inline'}}> since last week</p>

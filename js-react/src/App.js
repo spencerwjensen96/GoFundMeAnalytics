@@ -14,6 +14,7 @@ import Prediction from './components/Prediction';
 import NotFound from './components/NotFound'
 import LogIn from './components/LogIn';
 import CampaignDetails from './components/CampaignDetails';
+import DonorDashboard from './components/DonorDashboard';
 
 function App() {
   return (
@@ -41,6 +42,9 @@ function App() {
                 </Route>
                 <Route path="/campaign-dashboard">
                   <CampaignDashboard />
+                </Route>
+                <Route path="/donor-dashboard">
+                  <DonorDashboard />
                 </Route>
                 <Route path="/prediction">
                   <Prediction />
