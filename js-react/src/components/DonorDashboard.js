@@ -23,19 +23,19 @@ render() {
         <Container>
             <div style={{textAlign: 'center'}} className="pb-2">
                 <h1><b>My Donor Analytics Dashboard</b></h1>
-                <p><Link style={{color: 'black'}} eventKey="dashboard" to="/campaign-dashboard">Campaign Dashboard</Link> | <Link style={{color: 'black'}} eventKey="dashboard" to="/donor-dashboard">Donor Dashboard</Link></p>
+                <p><Link style={{color: 'black'}} eventkey="dashboard" to="/campaign-dashboard">Campaign Dashboard</Link> | <Link style={{color: 'black'}} eventkey="dashboard" to="/donor-dashboard">Donor Dashboard</Link></p>
             </div>
-            {Object.values(data).map((d) => {
+            {Object.values(data).map((d, index) => {
                 return(
-                    <Row>
+                    <Row key={`${index}`}>
                     <Col style={{backgroundColor: '#EBEBEB', borderRadius: '7px'}} className="pb-2 mb-2">
                         <img src={d.profile_url ? d.profile_url : "https://rosieshouse.org/wp-content/uploads/2016/06/avatar-large-square.jpg"} className="pt-2" style={{width: '65px', height: '70px', borderRadius:'50%'}}></img>
                         <p style={{display: 'inline'}} className="pl-3 pt-2">Name: {d.name.toUpperCase()}</p>
                         <p style={{display: 'inline'}} className="pl-5 pt-2">Donation Total: </p>
-                        <i style={{'color': 'green'}} class="fas fa-dollar-sign pl-1 pt-3"></i>
+                        <i style={{'color': 'green'}} className="fas fa-dollar-sign pl-1 pt-3"></i>
                         <p style={{display: 'inline', 'color': 'green'}} className="pt-3"> {d.amount}</p>
                         <p style={{display: 'inline'}} className="pl-5 pt-2">Donation Date: {d.collected_date}</p>
-                        <a href="mailto:"><i style={{color: '#00568C'}} class="fas fa-envelope fa-3x float-right pt-3 pr-5"></i></a>
+                        <a href="mailto:"><i style={{color: '#00568C'}} className="fas fa-envelope fa-3x float-right pt-3 pr-5"></i></a>
                     </Col>
                 </Row>
                 )

@@ -55,7 +55,7 @@ const data01 = [
     { name: 'Anonymous Donors', value: 157 }, { name: 'Named Donors', value: 340 },
   ];
   const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042'];
-const card = {background: '#F5F2F2', 'border-radius': '7px'}
+const card = {background: '#F5F2F2', 'borderRadius': '7px'}
 export default class Example extends PureComponent {
   static jsfiddleUrl = 'https://jsfiddle.net/alidingling/xqjtetw0/';
 
@@ -64,38 +64,38 @@ export default class Example extends PureComponent {
         <Container fluid="md">
           <div style={{textAlign: 'center'}} className="pb-2">
             <h1><b>My Campaign Analytics Dashboard</b></h1>
-            <p><Link style={{color: 'black'}} eventKey="dashboard" to="/campaign-dashboard">Campaign Dashboard</Link> | <Link style={{color: 'black'}} eventKey="dashboard" to="/donor-dashboard">Donor Dashboard</Link></p>
+            <p><Link style={{color: 'black'}} eventkey="dashboard" to="/campaign-dashboard">Campaign Dashboard</Link> | <Link style={{color: 'black'}} eventkey="dashboard" to="/donor-dashboard">Donor Dashboard</Link></p>
           </div>
             <Row className="p-2">
                 <Col style={card} className="p-2 mx-2 mb-3">
                     <img src="/media/dollar.jpg" className="float-right" style={{'width':'60px', 'height':'45px'}}></img>
-                    <p style={{'line-height':'80%'}}>DONATIONS</p>
-                    <strong><h3 style={{'line-height':'80%'}}>$2,500</h3></strong>
-                    <i style={{'color': 'green'}} class="fas fa-arrow-up"></i>
+                    <p style={{'lineHeight':'80%'}}>DONATIONS</p>
+                    <strong><h3 style={{'lineHeight':'80%'}}>$2,500</h3></strong>
+                    <i style={{'color': 'green'}} className="fas fa-arrow-up"></i>
                     <p style={{'display': 'inline', 'color': 'green'}}><strong> 12%</strong></p>
                     <p style={{'display': 'inline'}}> since last week</p>
                 </Col>
                 <Col style={card} className="p-2 mx-2 mb-3">
                 <img src="/media/heart.png" className="float-right" style={{'width':'55px', 'height':'55px'}}></img>
-                    <p style={{'line-height':'80%'}}>HEARTS</p>
-                    <strong><h3 style={{'line-height':'80%'}}>50</h3></strong>
-                    <i style={{'color': 'red'}} class="fas fa-arrow-down"></i>
+                    <p style={{'lineHeight':'80%'}}>HEARTS</p>
+                    <strong><h3 style={{'lineHeight':'80%'}}>50</h3></strong>
+                    <i style={{'color': 'red'}} className="fas fa-arrow-down"></i>
                     <p style={{'display': 'inline', 'color': 'red'}}><strong> 5%</strong></p>
                     <p style={{'display': 'inline'}}> since last week</p>
                 </Col>
                 <Col style={card} className="p-2 mx-2 mb-3">
                 <img src="/media/donor.png" className="float-right" style={{'width':'55px', 'height':'55px'}}></img>
-                    <p style={{'line-height':'80%'}}>DONORS</p>
-                    <strong><h3 style={{'line-height':'80%'}}>11</h3></strong>
-                    <i style={{'color': 'green'}} class="fas fa-arrow-up"></i>
+                    <p style={{'lineHeight':'80%'}}>DONORS</p>
+                    <strong><h3 style={{'lineHeight':'80%'}}>11</h3></strong>
+                    <i style={{'color': 'green'}} className="fas fa-arrow-up"></i>
                     <p style={{'display': 'inline', 'color': 'green'}}><strong> 8%</strong></p>
                     <p style={{'display': 'inline'}}> since last week</p>
                 </Col>
                 <Col style={card} className="p-2 mx-2 mb-3">
                 <img src="/media/comment.png" className="float-right" style={{'width':'50px', 'height':'50px'}}></img>
-                    <p style={{'line-height':'80%'}}>COMMENTS</p>
-                    <strong><h3 style={{'line-height':'80%'}}>11</h3></strong>
-                    <i style={{'color': 'green'}} class="fas fa-arrow-up"></i>
+                    <p style={{'lineHeight':'80%'}}>COMMENTS</p>
+                    <strong><h3 style={{'lineHeight':'80%'}}>11</h3></strong>
+                    <i style={{'color': 'green'}} className="fas fa-arrow-up"></i>
                     <p style={{'display': 'inline', 'color': 'green'}}><strong> 2%</strong></p>
                     <p style={{'display': 'inline'}}> since last week</p>
                 </Col>
