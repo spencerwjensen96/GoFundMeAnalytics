@@ -37,7 +37,6 @@ class Predict(APIView):
     @csrf_exempt
     def post(self, request, format=None):
         serializer = PredictSerializer(data=request.data)
-        print(request.data)
         if serializer.is_valid():
             serializer.save() # add this as a prediction to our database
 
