@@ -89,13 +89,18 @@ export default function Home(props) {
 const PaymentForm = props => {
     // corona virus. COVID-19. Help me. Money. Service. Firefighters. Police men. Nurses. Doctors. Healthcare workers.
   return(
-        <>
-        {/*console.log("issubmitting 2", props.isSubmitting)*/}
+    <>
+    <div style={{textAlign: 'center'}}>
+        <h1>Predict the Success of Your Campaign</h1>
+    </div>
+    {/*console.log("issubmitting 2", props.isSubmitting)*/}
     <bs.Container fluid className="p-0 flex-column">
         <Form>
         <bs.Row noGutters className="flex-grow-0 flex-shrink-0">
                 <bs.Col md={12} className="p-1 m-">
-                        <p>Go Fund Me Campaign Details</p>
+                        <div style={{textAlign: 'center'}}>
+                            <p>Enter your campaign information and we will guess how much money you will raise!</p>
+                        </div>
                         <Input title="Title" name="title" type="text" />
                         <Input title="Description" name="description" type="text" />
 

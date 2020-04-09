@@ -76,6 +76,9 @@ if(campaigns) {
   }
   return(
     <>
+    <div style={{textAlign: 'center'}}>
+      <h1>Go Fund Me Campaigns</h1>
+    </div>
     <Accordion defaultActiveKey="0" className="mx-3 px-3">
       <Card>
       <bs.Form style={{'display': 'inline'}} onSubmit={(e) => handleClick(e)}>

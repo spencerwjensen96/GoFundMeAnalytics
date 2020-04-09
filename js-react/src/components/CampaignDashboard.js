@@ -63,6 +63,9 @@ export default class Example extends PureComponent {
   render() {
     return (
         <Container fluid="md">
+          <div style={{textAlign: 'center'}}>
+            <h1>My Analytics Dashboard</h1>
+          </div>
             <Row className="p-2">
                 <Col style={card} className="p-2 mx-2 mb-3">
                     <img src="/media/dollar.jpg" className="float-right" style={{'width':'60px', 'height':'45px'}}></img>
