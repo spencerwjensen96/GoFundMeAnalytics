@@ -77,6 +77,7 @@ export default function Home(props) {
                 history.push({
                     pathname: '/prediction',
                     calculatedPercent: predictedPercent,
+                    goal: values.goal,
                 });
                 return;
             }}
