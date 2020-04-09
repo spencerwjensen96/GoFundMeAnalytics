@@ -1,6 +1,6 @@
 import React, { useContext, useState }from 'react';
 import * as bs from 'react-bootstrap';
-import {CardDeck, Card, ProgressBar, Accordion, Button, DropdownButton, Dropdown, FormControl } from 'react-bootstrap'
+import {CardDeck, Card, ProgressBar, Accordion, Button, DropdownButton, Dropdown } from 'react-bootstrap'
 import {useHistory, Link} from "react-router-dom";
 import AppContext from '../context';
 import stateObject from './States.json';

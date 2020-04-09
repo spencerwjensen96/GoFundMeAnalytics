@@ -68,7 +68,7 @@ export default class Example extends PureComponent {
           </div>
             <Row className="p-2">
                 <Col style={card} className="p-2 mx-2 mb-3">
-                    <img src="/media/dollar.jpg" className="float-right" style={{'width':'60px', 'height':'45px'}}></img>
+                    <img src="/media/dollar.jpg" className="float-right" style={{'width':'60px', 'height':'45px'}} alt="things"></img>
                     <p style={{'lineHeight':'80%'}}>DONATIONS</p>
                     <strong><h3 style={{'lineHeight':'80%'}}>$2,500</h3></strong>
                     <i style={{'color': 'green'}} className="fas fa-arrow-up"></i>
@@ -76,7 +76,7 @@ export default class Example extends PureComponent {
                     <p style={{'display': 'inline'}}> since last week</p>
                 </Col>
                 <Col style={card} className="p-2 mx-2 mb-3">
-                <img src="/media/heart.png" className="float-right" style={{'width':'55px', 'height':'55px'}}></img>
+                <img src="/media/heart.png" className="float-right" style={{'width':'55px', 'height':'55px'}} alt="things"></img>
                     <p style={{'lineHeight':'80%'}}>HEARTS</p>
                     <strong><h3 style={{'lineHeight':'80%'}}>50</h3></strong>
                     <i style={{'color': 'red'}} className="fas fa-arrow-down"></i>
@@ -84,7 +84,7 @@ export default class Example extends PureComponent {
                     <p style={{'display': 'inline'}}> since last week</p>
                 </Col>
                 <Col style={card} className="p-2 mx-2 mb-3">
-                <img src="/media/donor.png" className="float-right" style={{'width':'55px', 'height':'55px'}}></img>
+                <img src="/media/donor.png" className="float-right" style={{'width':'55px', 'height':'55px'}} alt="things"></img>
                     <p style={{'lineHeight':'80%'}}>DONORS</p>
                     <strong><h3 style={{'lineHeight':'80%'}}>11</h3></strong>
                     <i style={{'color': 'green'}} className="fas fa-arrow-up"></i>
@@ -92,7 +92,7 @@ export default class Example extends PureComponent {
                     <p style={{'display': 'inline'}}> since last week</p>
                 </Col>
                 <Col style={card} className="p-2 mx-2 mb-3">
-                <img src="/media/comment.png" className="float-right" style={{'width':'50px', 'height':'50px'}}></img>
+                <img src="/media/comment.png" className="float-right" style={{'width':'50px', 'height':'50px'}} alt="things"></img>
                     <p style={{'lineHeight':'80%'}}>COMMENTS</p>
                     <strong><h3 style={{'lineHeight':'80%'}}>11</h3></strong>
                     <i style={{'color': 'green'}} className="fas fa-arrow-up"></i>

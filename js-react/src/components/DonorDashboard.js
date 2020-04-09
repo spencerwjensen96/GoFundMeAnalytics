@@ -29,7 +29,7 @@ render() {
                 return(
                     <Row key={`${index}`}>
                     <Col style={{backgroundColor: '#EBEBEB', borderRadius: '7px'}} className="pb-2 mb-2">
-                        <img src={d.profile_url ? d.profile_url : "https://rosieshouse.org/wp-content/uploads/2016/06/avatar-large-square.jpg"} className="pt-2" style={{width: '65px', height: '70px', borderRadius:'50%'}}></img>
+                        <img src={d.profile_url ? d.profile_url : "https://rosieshouse.org/wp-content/uploads/2016/06/avatar-large-square.jpg"} alt={`${d.name} ${index}`} className="pt-2" style={{width: '65px', height: '70px', borderRadius:'50%'}}></img>
                         <p style={{display: 'inline'}} className="pl-3 pt-2">Name: {d.name.toUpperCase()}</p>
                         <p style={{display: 'inline'}} className="pl-5 pt-2">Donation Total: </p>
                         <i style={{'color': 'green'}} className="fas fa-dollar-sign pl-1 pt-3"></i>

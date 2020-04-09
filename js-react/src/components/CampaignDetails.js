@@ -1,6 +1,5 @@
-import React, {useState, useContext} from 'react'
-//import {useRouteMatch} from "react-router-dom";
-import {Row, Col, Image, Button, Container, ProgressBar, Tooltip, OverlayTrigger} from 'react-bootstrap'
+import React, {useContext} from 'react'
+import {Row, Col, Image, Container, ProgressBar, Tooltip, OverlayTrigger} from 'react-bootstrap'
 import { useParams } from 'react-router-dom';
 import AppContext from '../context'
 import NotFound from './NotFound'
@@ -36,7 +35,6 @@ function CampaignDetails(props){
     let {id} = useParams()
 
     const camp = CampArray.find(x => x.id == id)
-    console.log(camp)
 
     if(camp === undefined){
         return(
@@ -45,7 +43,7 @@ function CampaignDetails(props){
     }
 
     const date = new Date(camp.launchDate);
-    var month = new Array();
+    var month = [];
     month[0] = "January";
     month[1] = "February";
     month[2] = "March";
@@ -58,14 +56,13 @@ function CampaignDetails(props){
     month[9] = "October";
     month[10] = "November";
     month[11] = "December";
-    console.log(date)
-    const title = {'font-family': 'Roboto', color: '#141414'}
+    const title = {'fontFamily': 'Roboto', color: '#141414'}
     
     return(
         <Container>
             <h2 className="text-center" style={title}><strong>{camp.title}</strong></h2>
             <Row xs={12} style={{height: '500px', textAlign: 'center', background: 'black', borderRadius: '5px'}} className="d-flex justify-content-center mb-3">
-                <Image height="500px" src={camp.imageUrl} ></Image>
+                <Image style={{ maxHeight: '500px' }} src={camp.imageUrl} alt="campaign photo" ></Image>
             </Row>
 
             <Row>
@@ -75,15 +72,15 @@ function CampaignDetails(props){
                         <h5 style={{lineHeight: '10%'}} className="mt-2 ml-4">{camp.userFirst} {camp.userLast} organized this fundraiser</h5>
                         </Row>
                     <Row className="p-1 mb-3">
-                        <i style={{color: 'pink'}} class="fas fa-heart fa-lg"></i>
+                        <i style={{color: 'pink'}} className="fas fa-heart fa-lg"></i>
                         <h5 style={{lineHeight: '10%'}} className="mt-2 ml-4">{camp.campaignHearts} people liked this fundraiser</h5>
                         </Row>
                     <Row className="p-1 mb-2">
-                        <i style={{color: 'gold'}} class="fas fa-photo-video fa-lg"></i>
+                        <i style={{color: 'gold'}} className="fas fa-photo-video fa-lg"></i>
                         <h5 style={{lineHeight: '10%'}} className="mt-2 ml-3">{camp.socialShareTotal} shares on social media</h5>
                         </Row>
                     <Row className="p-1 mb-2">
-                        <i style={{color: 'green'}} class="fas fa-dollar-sign fa-lg"></i>
+                        <i style={{color: 'green'}} className="fas fa-dollar-sign fa-lg"></i>
                         <h5 style={{lineHeight: '10%'}} className="mt-2 ml-4">{camp.donators} donators with ~${parseFloat(camp.moneyPerDonor).toFixed(2)} per donator</h5>
                     </Row>
                 </Col>
