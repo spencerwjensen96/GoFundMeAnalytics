@@ -1,5 +1,5 @@
 import React from 'react'
-import {Row, Col, Container, Button} from 'react-bootstrap'
+import {Container, Button} from 'react-bootstrap'
 
 const header = {borderBottom: 'solid 2px lightgray', fontWeight: '900'}
 const text = {color: '#5cb85c', textDecoration: 'underline'}
