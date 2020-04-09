@@ -1,11 +1,31 @@
 import React, {useState, useContext} from 'react'
 //import {useRouteMatch} from "react-router-dom";
-import {Row, Col, Image, Button, Container, ProgressBar} from 'react-bootstrap'
+import {Row, Col, Image, Button, Container, ProgressBar, Tooltip, OverlayTrigger} from 'react-bootstrap'
 import { useParams } from 'react-router-dom';
 import AppContext from '../context'
 import NotFound from './NotFound'
 
 const card = {background: '#F0F0F0', borderRadius: '8px', marginTop: '2rem', boxShadow: '-2px 2px 5px #9E9E9E'}
+
+function renderTooltip(props) {
+    return (
+      <Tooltip id="tooltip" {...props}>
+          <div style={{textAlign: 'left'}}>
+
+            The Quality Score was determined by several metrics including:
+            <br></br>
+            <span>&bull;Progress to goal per day</span>
+            <br></br>
+            <span>&bull;Number of donors</span>
+            <br></br>
+            <span>&bull;Shares on social media</span>
+            <br></br>
+            <span>&bull;Campaign hearts</span>
+            
+        </div>
+      </Tooltip>
+    );
+  }
 
 function CampaignDetails(props){
 
@@ -73,9 +93,18 @@ function CampaignDetails(props){
                             <h4 style={{display: 'inline'}}><b>${camp.currentAmount}</b></h4><p style={{display: 'inline'}}> raised of ${camp.goal} goal</p>
                         </div>
                         <ProgressBar style={{height: '10px'}} variant="success" now={camp.percentComplete} key={1}/>
-                        <p className="showing"><i className="fas fa-info-circle"></i> Quality Score: {camp.quality}</p>
+                        <Container className="mt-2">
+                            <OverlayTrigger
+                                style={{display: 'inline'}}
+                                placement="bottom"
+                                delay={{ show: 250, hide: 400 }}
+                                overlay={renderTooltip}>
+
+                                <i className="fas fa-info-circle"></i>
+                            </OverlayTrigger>
+                            <span style={{display: 'inline'}}>Quality Score: {parseFloat(camp.quality).toFixed(2)}</span>
+                        </Container>
                     </div>
-                    <p className="notshowing">Quality Score Determination:</p>
                 </Col>
             </Row>
             <Row>
