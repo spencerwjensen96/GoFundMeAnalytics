@@ -65,7 +65,6 @@ if(url) {
         }
       }
     }
-    console.log("filter: ", filter, "search: ", search)
     campaigns = campaigns.filter(campaign => campaign[filter].match(new RegExp(search, "i")))
     //sort the campaigns if filtering on quality
     if(filter === 'qualityText') {
@@ -177,7 +176,6 @@ if(campaigns) {
                           <Link to={`/details/${camp.id}`}><h5 className="card-subtitle mb-2"><strong style={title}>{camp.title}</strong></h5></Link>
                           <p className="card-text" style={desc}> {camp.description.substring(0, 50)}...</p>
                             <ProgressBar style={progressBar} variant='success' now={camp.percentComplete}/>
-                            {/* {console.log(progress)} */}
                           <p><strong>${camp.currentAmount} raised</strong> of ${camp.goal} </p>
                       </Card.Footer>
                       </Card>
