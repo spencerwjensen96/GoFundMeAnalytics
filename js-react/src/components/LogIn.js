@@ -9,7 +9,7 @@ export default function LogIn(){
             <h1 className="pb-3 pt-3" style={header}>Sign In</h1>
             <Container className="pt-5 w-50">
                 <Button variant="primary" className="p-2 px-5">Continue with Facebook</Button>
-                <hr data-content="OR" class="m-5 hr-text"></hr>
+                <hr data-content="OR" className="m-5 hr-text"></hr>
                 <Button variant="outline-success" className="p-2 px-5">Sign in with Go Fund Me</Button>
                 <a href="/"><p className="m-5" style={text}>Why do I have to sign in?</p></a>
             </Container>
