@@ -1,7 +1,6 @@
 import React from 'react';
 import * as bs from 'react-bootstrap'
 import {useHistory, Link} from 'react-router-dom'
-// import { Link } from "react-router-dom";
 
 export default function Header(props) {
 
@@ -9,7 +8,6 @@ export default function Header(props) {
 
 function handleClick(e) {
   history.push("/search/")
-  //history.push(`${e.target.value}`)
 }
 
 return(

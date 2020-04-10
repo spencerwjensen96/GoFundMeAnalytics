@@ -1,4 +1,4 @@
-import React, { useContext, useState }from 'react';
+import React, { useContext, useState, useEffect }from 'react';
 import * as bs from 'react-bootstrap';
 import {CardDeck, Card, ProgressBar, Accordion, Button, DropdownButton, Dropdown } from 'react-bootstrap'
 import {useHistory, Link} from "react-router-dom";
@@ -24,7 +24,6 @@ if(Object.values(context.campaigns).length > 0) {
 }
 
 if(campaigns) {
-  // console.log("camp", campaigns)
   for(let camp of campaigns) {
     if(camp.quality < 0.31) {
       camp.qualityText = 'Poor'
@@ -201,7 +200,7 @@ if(campaigns) {
 }
 else {
   return (
-    <p>Campaigns failed to load from the API. Try refreshing the page, to reconnect to the campaigns database.</p>
+    <p>Please wait while Campaigns load. If Campaigns do not load after 5 seconds, try refreshing the page.</p>
   );
 }
 
