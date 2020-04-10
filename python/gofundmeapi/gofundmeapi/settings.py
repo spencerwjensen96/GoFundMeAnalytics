@@ -21,9 +21,6 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'hrm8fo#nk-#mgr+-=gqm_9*bnwqzm6&(pc+ug#_gr4rzxm1(8l'
-
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
